@@ -93,7 +93,8 @@ namespace rabbitMQ
 
     class UUIDHelper 
     {
-        static std::string Uuid() {
+    public:
+        static std::string UUID() {
             std::random_device rd;
             std::mt19937_64 gernator(rd());
             std::uniform_int_distribution<int> distribution(0, 255);
