@@ -66,6 +66,10 @@ TEST(MsgQueueTest, delete_test)
     ASSERT_EQ(mqmp->Exists("queue5"), true);
 }
 
+TEST(Message, test)
+{
+}
+
 
 int main()
 {
