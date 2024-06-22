@@ -4,12 +4,15 @@
 #include <memory>
 #include <google/protobuf/map.h>
 
+// 交换机模块
 namespace rabbitMQ 
 {
     struct Exchange;
+    class ExchangeManager;
 
     using ExchangePtr = std::shared_ptr<Exchange>;
     using ExchangeMap = std::unordered_map<std::string, ExchangePtr>;
+    using ExchangeManagerPtr = std::shared_ptr<ExchangeManager>;
 
     struct Exchange 
     {

@@ -1,6 +1,7 @@
 #include "msgqueue.hpp"
 #include "binding.hpp"
 #include "help.hpp"
+#include "host.hpp"
 #include <gtest/gtest.h>
 #include <memory>
 

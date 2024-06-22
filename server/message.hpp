@@ -1,6 +1,8 @@
 #include "help.hpp"
 #include "msg.pb.h"
 
+
+// 消息管理模块
 namespace rabbitMQ {
     #define DATAFILE_SUBFIX ".mqd"
     #define TMPFILE_SUBFIX ".mqd.tmp"

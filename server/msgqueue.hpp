@@ -2,6 +2,7 @@
 
 #include "help.hpp"
 
+// 队列数据管理模块
 namespace rabbitMQ
 {
     struct MsgQueue;
