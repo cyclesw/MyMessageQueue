@@ -15,7 +15,7 @@ public:
 
     void TearDown() override
     {
-        // bmp->Clear();
+        bmp->Clear();
     }
 };
 

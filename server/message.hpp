@@ -402,7 +402,6 @@ namespace rabbitMQ {
             QueueMessagePtr qmp;
             {
                 LOCK(_mutex);
-                auto ret = findQueue(qname, qmp);
                 auto it = _queMsgs.find(qname);
                 qmp = std::make_shared<QueueMessage>(_basedir, qname);
                 _queMsgs.insert(std::make_pair(qname, qmp));

@@ -126,7 +126,7 @@ namespace rabbitMQ
         BindingMapper _mapper;
         BindingMap _bindings;       
     public:
-        BindingManager(const std::string& dbfile)
+        explicit BindingManager(const std::string& dbfile)
             :_mapper(dbfile)
         {
             _bindings = _mapper.Recovery();
@@ -171,9 +171,9 @@ namespace rabbitMQ
         {
             std::unique_lock<std::mutex> lock(_mtx);
             _mapper.RemoveMsgQueueBindings(qname);
-            for(auto start = _bindings.begin(); start != _bindings.end(); ++start)
+            for(auto & _binding : _bindings)
             {
-                start->second.erase(qname);
+                _binding.second.erase(qname);
             }
 
         }
