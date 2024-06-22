@@ -44,6 +44,7 @@ namespace rabbitMQ
 
         void DeleteExchange(const std::string& name)
         {
+            _bmp->RemoveExchangeBindings(name);
             _emp->DeleteExchange(name);
         }
 
@@ -68,6 +69,8 @@ namespace rabbitMQ
         void DeleteQueue(const std::string& qname)
         {
             _mqmp->DeleteQueue(qname);
+            _bmp->RemoveMsgQueueBindings(qname);
+            _mmp->DestroyQueueMessage(qname);
         }
 
         bool Bind(const std::string& exchangeName, const std::string& queueName, const std::string& key)

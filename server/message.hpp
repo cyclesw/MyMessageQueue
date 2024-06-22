@@ -418,6 +418,7 @@ namespace rabbitMQ {
                 LOCK(_mutex);
                 auto it = _queMsgs.find(qname);
                 if(it == _queMsgs.end())    return;
+                qmp = it->second;
                 _queMsgs.erase(it);
             }
             qmp->Clear();

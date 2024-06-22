@@ -28,13 +28,13 @@ TEST(MessageManager, insert)
     properties.set_id(UUIDHelper::UUID());
     properties.set_delivery_mode(DeliveryMode::DURABLE);
     properties.set_routing_key("news.music.pop");
-    mmp->InitQueueManager("queue2");
     mmp->Insert("queue1", &properties, "Hello World-1");
     mmp->Insert("queue1", nullptr, "Hello World-2", true);
     mmp->Insert("queue1", nullptr, "Hello World-3", true);
     mmp->Insert("queue1", nullptr, "Hello World-4", true);
     mmp->Insert("queue1", nullptr, "Hello World-5", false);
 
+    mmp->InitQueueManager("queue2");
     mmp->Insert("queue2", &properties, "Hello World-1");
     mmp->Insert("queue2", nullptr, "Hello World-2", true);
     mmp->Insert("queue2", nullptr, "Hello World-3", false);

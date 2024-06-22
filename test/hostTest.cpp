@@ -78,11 +78,40 @@ TEST_F(VirtualHostTest, InitTest)
     ASSERT_EQ(_host->ExistBinding("exchange3", "queue3"), true);
 }
 
-//TEST_F(VirtualHostTest, RemoveTest)
-//{
-////    _host->DeleteExchange("exchange1");
-//
-//}
+TEST_F(VirtualHostTest, RemoveExchange)
+{
+    _host->DeleteExchange("exchange1");
+    ASSERT_EQ(_host->ExistExchange("exchange1"), false);
+    ASSERT_EQ(_host->ExistBinding("exchange1", "queue1"), false);
+    ASSERT_EQ(_host->ExistBinding("exchange1", "queue2"), false);
+    ASSERT_EQ(_host->ExistBinding("exchange1", "queue2"), false);
+    ASSERT_EQ(_host->ExistQueue("queue1"), true);
+}
+
+TEST_F(VirtualHostTest, RemoveQueue)
+{
+    _host->DeleteQueue("queue1");
+    ASSERT_EQ(_host->ExistQueue("queue1"), false);
+    ASSERT_EQ(_host->ExistBinding("exchange1", "queue1"), false);
+    ASSERT_EQ(_host->ExistBinding("exchange2", "queue1"), false);
+    ASSERT_EQ(_host->ExistBinding("exchange3", "queue1"), false);
+}
+
+TEST_F(VirtualHostTest, AckTest)
+{
+    auto msg1 = _host->BasicConsume("queue1");
+    ASSERT_NE(msg1.get(), nullptr);
+    ASSERT_EQ(msg1->payload().body(), std::string("Hello-World1"));
+    _host->BasicAck(std::string("queue1"), msg1->payload().properties().id());
+
+    auto msg2 = _host->BasicConsume("queue1");
+    ASSERT_EQ(msg2->payload().body(), std::string("Hello-World2"));
+    _host->BasicAck(std::string("queue1"), msg2->payload().properties().id());
+
+    auto msg3 = _host->BasicConsume("queue1");
+    ASSERT_EQ(msg3->payload().body(), std::string("Hello-World3"));
+    _host->BasicAck("queue1", msg3->payload().properties().id());
+}
 
 int main()
 {
