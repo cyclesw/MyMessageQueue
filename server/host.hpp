@@ -60,6 +60,7 @@ namespace rabbitMQ
             bool qauto_delete,
             google::protobuf::Map<std::string, std::string>& args)
         {
+            _mmp->InitQueueManager(qname);
             return _mqmp->DeclareQueue(qname, qdurable, qexclusive, qauto_delete, args);
         }
 

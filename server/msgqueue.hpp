@@ -118,7 +118,7 @@ namespace rabbitMQ
         {
             QueueMap result;
             std::string sql = "select name, durable, exclusive, auto_delete, args from queue_table;";
-            _sql_helper.Exec(sql, selectCallback, &result);
+            assert(_sql_helper.Exec(sql, selectCallback, &result));
             return result;
         }
 

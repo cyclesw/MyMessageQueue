@@ -13,7 +13,7 @@ public:
     {
         LOG_INFO("开始初始化");
         google::protobuf::Map<std::string, std::string> empty;
-        _host = std::make_shared<VirtualHost>("host1", "./data/host1/message/", "./data/host/host1.db");
+        _host = std::make_shared<VirtualHost>("host1", "./data/host1/message/", "./data/host1/host1.db");
         _host->DeclareExchange("exchange1", ExchangeType::DIRECT, true, false, empty);
         _host->DeclareExchange("exchange2", ExchangeType::DIRECT, true, false, empty);
         _host->DeclareExchange("exchange3", ExchangeType::DIRECT, true, false, empty);

@@ -120,14 +120,14 @@ namespace rabbitMQ {
             size_t msg_size = body.size();
 
             bool ret = helper.Write((const char*)&msg_size, fsize, sizeof(size_t));
-            if(ret == false)
+            if(!ret)
             {
                 LOG_DEBUG("写入失败");
                 return false;
             }
 
             ret = helper.Write(body.data(), fsize+sizeof(size_t), body.size());
-            if(ret == false)
+            if(!ret)
             {
                 LOG_DEBUG("写入失败");
             }
@@ -393,7 +393,7 @@ namespace rabbitMQ {
         }
 
     public:
-        MessageManager(const std::string& basedir)
+        explicit MessageManager(const std::string& basedir)
         :_basedir(basedir)
         {}
 
@@ -403,6 +403,7 @@ namespace rabbitMQ {
             {
                 LOCK(_mutex);
                 auto it = _queMsgs.find(qname);
+                if(it != _queMsgs.end())    return;
                 qmp = std::make_shared<QueueMessage>(_basedir, qname);
                 _queMsgs.insert(std::make_pair(qname, qmp));
             }

@@ -9,21 +9,18 @@ MessageManagerPtr mmp1;
 class messageTest : public testing::Environment
 {
 public:
-    virtual void SetUp() override
+    void SetUp() override
     {
         mmp = std::make_shared<MessageManager>("./data/message/");
         mmp->InitQueueManager("queue1");
     }
 
-    virtual void TearDown() override
+    void TearDown() override
     {
         mmp->Clear();
     }
 };
 
-// TEST(MessageManager, recovery)
-// {
-// }
 
 TEST(MessageManager, insert)
 {
@@ -45,16 +42,15 @@ TEST(MessageManager, insert)
     mmp->Insert("queue2", nullptr, "Hello World-5", true);
 
 
-    ASSERT_EQ(mmp->GetTableCount("queue1"), 5);
-    ASSERT_EQ(mmp->GetTotalCount("queue1"), 4);
-    ASSERT_EQ(mmp->GetDurableCount("queue1"), 4);
-    ASSERT_EQ(mmp->GetWaitackCount("queue1"), 0);
+    EXPECT_EQ(mmp->GetTableCount("queue1"), 5);
+    EXPECT_EQ(mmp->GetTotalCount("queue1"), 4);
+    EXPECT_EQ(mmp->GetDurableCount("queue1"), 4);
+    EXPECT_EQ(mmp->GetWaitackCount("queue1"), 0);
 
-    ASSERT_EQ(mmp->GetTableCount("queue2"), 5);
-    ASSERT_EQ(mmp->GetTotalCount("queue2"), 4);
-    ASSERT_EQ(mmp->GetDurableCount("queue2"), 4);
-    ASSERT_EQ(mmp->GetWaitackCount("queue2"), 0);
-
+    EXPECT_EQ(mmp->GetTableCount("queue2"), 5);
+    EXPECT_EQ(mmp->GetTotalCount("queue2"), 4);
+    EXPECT_EQ(mmp->GetDurableCount("queue2"), 4);
+    EXPECT_EQ(mmp->GetWaitackCount("queue2"), 0);
 }
 
 TEST(MessageManager, selectQ1)
@@ -115,6 +111,7 @@ int main()
 {
     testing::InitGoogleTest();
     testing::AddGlobalTestEnvironment(new messageTest);
+    system("pwd");
     
 
     return RUN_ALL_TESTS();
