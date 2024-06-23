@@ -10,8 +10,14 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 find_package(PkgConfig REQUIRED)
 find_package(Boost REQUIRED)
+find_package(boost_unit_test_framework REQUIRED)
+find_package(boost_test_exec_monitor REQUIRED)
 
 pkg_check_modules(MyLib REQUIRED IMPORTED_TARGET protobuf sqlite3 gtest spdlog)
+
+#set(PROTO_FILES ${PROJECT_SOURCE_DIR}/common/msg.proto)
+
+#protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS  ${PROTO_FILES} )
 
 # set(GLOBAL_LIB 
 #     PkgConfig::MyLib
