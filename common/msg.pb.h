@@ -50,7 +50,7 @@ struct TableStruct_msg_2eproto {
 };
 extern const ::google::protobuf::internal::DescriptorTable
     descriptor_table_msg_2eproto;
-namespace rabbitMQ {
+namespace MyMQ {
 class BasicProperties;
 struct BasicPropertiesDefaultTypeInternal;
 extern BasicPropertiesDefaultTypeInternal _BasicProperties_default_instance_;
@@ -60,13 +60,13 @@ extern MessageDefaultTypeInternal _Message_default_instance_;
 class Message_Payload;
 struct Message_PayloadDefaultTypeInternal;
 extern Message_PayloadDefaultTypeInternal _Message_Payload_default_instance_;
-}  // namespace rabbitMQ
+}  // namespace MyMQ
 namespace google {
 namespace protobuf {
 }  // namespace protobuf
 }  // namespace google
 
-namespace rabbitMQ {
+namespace MyMQ {
 enum ExchangeType : int {
   UNKOWNTYPE = 0,
   DIRECT = 1,
@@ -143,7 +143,7 @@ inline bool DeliveryMode_Parse(absl::string_view name, DeliveryMode* value) {
 // -------------------------------------------------------------------
 
 class BasicProperties final : public ::google::protobuf::Message
-/* @@protoc_insertion_point(class_definition:rabbitMQ.BasicProperties) */ {
+/* @@protoc_insertion_point(class_definition:MyMQ.BasicProperties) */ {
  public:
   inline BasicProperties() : BasicProperties(nullptr) {}
   ~BasicProperties() override;
@@ -249,7 +249,7 @@ class BasicProperties final : public ::google::protobuf::Message
   void InternalSwap(BasicProperties* other);
  private:
   friend class ::google::protobuf::internal::AnyMetadata;
-  static ::absl::string_view FullMessageName() { return "rabbitMQ.BasicProperties"; }
+  static ::absl::string_view FullMessageName() { return "MyMQ.BasicProperties"; }
 
  protected:
   explicit BasicProperties(::google::protobuf::Arena* arena);
@@ -302,23 +302,23 @@ class BasicProperties final : public ::google::protobuf::Message
   std::string* _internal_mutable_routing_key();
 
   public:
-  // .rabbitMQ.DeliveryMode delivery_mode = 2;
+  // .MyMQ.DeliveryMode delivery_mode = 2;
   void clear_delivery_mode() ;
-  ::rabbitMQ::DeliveryMode delivery_mode() const;
-  void set_delivery_mode(::rabbitMQ::DeliveryMode value);
+  ::MyMQ::DeliveryMode delivery_mode() const;
+  void set_delivery_mode(::MyMQ::DeliveryMode value);
 
   private:
-  ::rabbitMQ::DeliveryMode _internal_delivery_mode() const;
-  void _internal_set_delivery_mode(::rabbitMQ::DeliveryMode value);
+  ::MyMQ::DeliveryMode _internal_delivery_mode() const;
+  void _internal_set_delivery_mode(::MyMQ::DeliveryMode value);
 
   public:
-  // @@protoc_insertion_point(class_scope:rabbitMQ.BasicProperties)
+  // @@protoc_insertion_point(class_scope:MyMQ.BasicProperties)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
       2, 3, 0,
-      46, 2>
+      42, 2>
       _table_;
 
   static constexpr const void* _raw_default_instance_ =
@@ -350,7 +350,7 @@ class BasicProperties final : public ::google::protobuf::Message
 // -------------------------------------------------------------------
 
 class Message_Payload final : public ::google::protobuf::Message
-/* @@protoc_insertion_point(class_definition:rabbitMQ.Message.Payload) */ {
+/* @@protoc_insertion_point(class_definition:MyMQ.Message.Payload) */ {
  public:
   inline Message_Payload() : Message_Payload(nullptr) {}
   ~Message_Payload() override;
@@ -456,7 +456,7 @@ class Message_Payload final : public ::google::protobuf::Message
   void InternalSwap(Message_Payload* other);
  private:
   friend class ::google::protobuf::internal::AnyMetadata;
-  static ::absl::string_view FullMessageName() { return "rabbitMQ.Message.Payload"; }
+  static ::absl::string_view FullMessageName() { return "MyMQ.Message.Payload"; }
 
  protected:
   explicit Message_Payload(::google::protobuf::Arena* arena);
@@ -509,28 +509,28 @@ class Message_Payload final : public ::google::protobuf::Message
   std::string* _internal_mutable_valid();
 
   public:
-  // .rabbitMQ.BasicProperties properties = 1;
+  // .MyMQ.BasicProperties properties = 1;
   bool has_properties() const;
   void clear_properties() ;
-  const ::rabbitMQ::BasicProperties& properties() const;
-  PROTOBUF_NODISCARD ::rabbitMQ::BasicProperties* release_properties();
-  ::rabbitMQ::BasicProperties* mutable_properties();
-  void set_allocated_properties(::rabbitMQ::BasicProperties* value);
-  void unsafe_arena_set_allocated_properties(::rabbitMQ::BasicProperties* value);
-  ::rabbitMQ::BasicProperties* unsafe_arena_release_properties();
+  const ::MyMQ::BasicProperties& properties() const;
+  PROTOBUF_NODISCARD ::MyMQ::BasicProperties* release_properties();
+  ::MyMQ::BasicProperties* mutable_properties();
+  void set_allocated_properties(::MyMQ::BasicProperties* value);
+  void unsafe_arena_set_allocated_properties(::MyMQ::BasicProperties* value);
+  ::MyMQ::BasicProperties* unsafe_arena_release_properties();
 
   private:
-  const ::rabbitMQ::BasicProperties& _internal_properties() const;
-  ::rabbitMQ::BasicProperties* _internal_mutable_properties();
+  const ::MyMQ::BasicProperties& _internal_properties() const;
+  ::MyMQ::BasicProperties* _internal_mutable_properties();
 
   public:
-  // @@protoc_insertion_point(class_scope:rabbitMQ.Message.Payload)
+  // @@protoc_insertion_point(class_scope:MyMQ.Message.Payload)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
       2, 3, 1,
-      42, 2>
+      38, 2>
       _table_;
 
   static constexpr const void* _raw_default_instance_ =
@@ -554,7 +554,7 @@ class Message_Payload final : public ::google::protobuf::Message
     mutable ::google::protobuf::internal::CachedSize _cached_size_;
     ::google::protobuf::internal::ArenaStringPtr body_;
     ::google::protobuf::internal::ArenaStringPtr valid_;
-    ::rabbitMQ::BasicProperties* properties_;
+    ::MyMQ::BasicProperties* properties_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
   union { Impl_ _impl_; };
@@ -563,7 +563,7 @@ class Message_Payload final : public ::google::protobuf::Message
 // -------------------------------------------------------------------
 
 class Message final : public ::google::protobuf::Message
-/* @@protoc_insertion_point(class_definition:rabbitMQ.Message) */ {
+/* @@protoc_insertion_point(class_definition:MyMQ.Message) */ {
  public:
   inline Message() : Message(nullptr) {}
   ~Message() override;
@@ -669,7 +669,7 @@ class Message final : public ::google::protobuf::Message
   void InternalSwap(Message* other);
  private:
   friend class ::google::protobuf::internal::AnyMetadata;
-  static ::absl::string_view FullMessageName() { return "rabbitMQ.Message"; }
+  static ::absl::string_view FullMessageName() { return "MyMQ.Message"; }
 
  protected:
   explicit Message(::google::protobuf::Arena* arena);
@@ -691,19 +691,19 @@ class Message final : public ::google::protobuf::Message
     kOffsetFieldNumber = 2,
     kLengthFieldNumber = 3,
   };
-  // .rabbitMQ.Message.Payload payload = 1;
+  // .MyMQ.Message.Payload payload = 1;
   bool has_payload() const;
   void clear_payload() ;
-  const ::rabbitMQ::Message_Payload& payload() const;
-  PROTOBUF_NODISCARD ::rabbitMQ::Message_Payload* release_payload();
-  ::rabbitMQ::Message_Payload* mutable_payload();
-  void set_allocated_payload(::rabbitMQ::Message_Payload* value);
-  void unsafe_arena_set_allocated_payload(::rabbitMQ::Message_Payload* value);
-  ::rabbitMQ::Message_Payload* unsafe_arena_release_payload();
+  const ::MyMQ::Message_Payload& payload() const;
+  PROTOBUF_NODISCARD ::MyMQ::Message_Payload* release_payload();
+  ::MyMQ::Message_Payload* mutable_payload();
+  void set_allocated_payload(::MyMQ::Message_Payload* value);
+  void unsafe_arena_set_allocated_payload(::MyMQ::Message_Payload* value);
+  ::MyMQ::Message_Payload* unsafe_arena_release_payload();
 
   private:
-  const ::rabbitMQ::Message_Payload& _internal_payload() const;
-  ::rabbitMQ::Message_Payload* _internal_mutable_payload();
+  const ::MyMQ::Message_Payload& _internal_payload() const;
+  ::MyMQ::Message_Payload* _internal_mutable_payload();
 
   public:
   // uint32 offset = 2;
@@ -726,7 +726,7 @@ class Message final : public ::google::protobuf::Message
   void _internal_set_length(::uint32_t value);
 
   public:
-  // @@protoc_insertion_point(class_scope:rabbitMQ.Message)
+  // @@protoc_insertion_point(class_scope:MyMQ.Message)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
@@ -754,7 +754,7 @@ class Message final : public ::google::protobuf::Message
                           const Message& from_msg);
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     mutable ::google::protobuf::internal::CachedSize _cached_size_;
-    ::rabbitMQ::Message_Payload* payload_;
+    ::MyMQ::Message_Payload* payload_;
     ::uint32_t offset_;
     ::uint32_t length_;
     PROTOBUF_TSAN_DECLARE_MEMBER
@@ -786,7 +786,7 @@ inline void BasicProperties::clear_id() {
 }
 inline const std::string& BasicProperties::id() const
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:rabbitMQ.BasicProperties.id)
+  // @@protoc_insertion_point(field_get:MyMQ.BasicProperties.id)
   return _internal_id();
 }
 template <typename Arg_, typename... Args_>
@@ -794,11 +794,11 @@ inline PROTOBUF_ALWAYS_INLINE void BasicProperties::set_id(Arg_&& arg,
                                                      Args_... args) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.id_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
-  // @@protoc_insertion_point(field_set:rabbitMQ.BasicProperties.id)
+  // @@protoc_insertion_point(field_set:MyMQ.BasicProperties.id)
 }
 inline std::string* BasicProperties::mutable_id() ABSL_ATTRIBUTE_LIFETIME_BOUND {
   std::string* _s = _internal_mutable_id();
-  // @@protoc_insertion_point(field_mutable:rabbitMQ.BasicProperties.id)
+  // @@protoc_insertion_point(field_mutable:MyMQ.BasicProperties.id)
   return _s;
 }
 inline const std::string& BasicProperties::_internal_id() const {
@@ -815,7 +815,7 @@ inline std::string* BasicProperties::_internal_mutable_id() {
 }
 inline std::string* BasicProperties::release_id() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  // @@protoc_insertion_point(field_release:rabbitMQ.BasicProperties.id)
+  // @@protoc_insertion_point(field_release:MyMQ.BasicProperties.id)
   return _impl_.id_.Release();
 }
 inline void BasicProperties::set_allocated_id(std::string* value) {
@@ -826,27 +826,27 @@ inline void BasicProperties::set_allocated_id(std::string* value) {
           _impl_.id_.Set("", GetArena());
         }
   #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:rabbitMQ.BasicProperties.id)
+  // @@protoc_insertion_point(field_set_allocated:MyMQ.BasicProperties.id)
 }
 
-// .rabbitMQ.DeliveryMode delivery_mode = 2;
+// .MyMQ.DeliveryMode delivery_mode = 2;
 inline void BasicProperties::clear_delivery_mode() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.delivery_mode_ = 0;
 }
-inline ::rabbitMQ::DeliveryMode BasicProperties::delivery_mode() const {
-  // @@protoc_insertion_point(field_get:rabbitMQ.BasicProperties.delivery_mode)
+inline ::MyMQ::DeliveryMode BasicProperties::delivery_mode() const {
+  // @@protoc_insertion_point(field_get:MyMQ.BasicProperties.delivery_mode)
   return _internal_delivery_mode();
 }
-inline void BasicProperties::set_delivery_mode(::rabbitMQ::DeliveryMode value) {
+inline void BasicProperties::set_delivery_mode(::MyMQ::DeliveryMode value) {
   _internal_set_delivery_mode(value);
-  // @@protoc_insertion_point(field_set:rabbitMQ.BasicProperties.delivery_mode)
+  // @@protoc_insertion_point(field_set:MyMQ.BasicProperties.delivery_mode)
 }
-inline ::rabbitMQ::DeliveryMode BasicProperties::_internal_delivery_mode() const {
+inline ::MyMQ::DeliveryMode BasicProperties::_internal_delivery_mode() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
-  return static_cast<::rabbitMQ::DeliveryMode>(_impl_.delivery_mode_);
+  return static_cast<::MyMQ::DeliveryMode>(_impl_.delivery_mode_);
 }
-inline void BasicProperties::_internal_set_delivery_mode(::rabbitMQ::DeliveryMode value) {
+inline void BasicProperties::_internal_set_delivery_mode(::MyMQ::DeliveryMode value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.delivery_mode_ = value;
 }
@@ -858,7 +858,7 @@ inline void BasicProperties::clear_routing_key() {
 }
 inline const std::string& BasicProperties::routing_key() const
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:rabbitMQ.BasicProperties.routing_key)
+  // @@protoc_insertion_point(field_get:MyMQ.BasicProperties.routing_key)
   return _internal_routing_key();
 }
 template <typename Arg_, typename... Args_>
@@ -866,11 +866,11 @@ inline PROTOBUF_ALWAYS_INLINE void BasicProperties::set_routing_key(Arg_&& arg,
                                                      Args_... args) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.routing_key_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
-  // @@protoc_insertion_point(field_set:rabbitMQ.BasicProperties.routing_key)
+  // @@protoc_insertion_point(field_set:MyMQ.BasicProperties.routing_key)
 }
 inline std::string* BasicProperties::mutable_routing_key() ABSL_ATTRIBUTE_LIFETIME_BOUND {
   std::string* _s = _internal_mutable_routing_key();
-  // @@protoc_insertion_point(field_mutable:rabbitMQ.BasicProperties.routing_key)
+  // @@protoc_insertion_point(field_mutable:MyMQ.BasicProperties.routing_key)
   return _s;
 }
 inline const std::string& BasicProperties::_internal_routing_key() const {
@@ -887,7 +887,7 @@ inline std::string* BasicProperties::_internal_mutable_routing_key() {
 }
 inline std::string* BasicProperties::release_routing_key() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  // @@protoc_insertion_point(field_release:rabbitMQ.BasicProperties.routing_key)
+  // @@protoc_insertion_point(field_release:MyMQ.BasicProperties.routing_key)
   return _impl_.routing_key_.Release();
 }
 inline void BasicProperties::set_allocated_routing_key(std::string* value) {
@@ -898,14 +898,14 @@ inline void BasicProperties::set_allocated_routing_key(std::string* value) {
           _impl_.routing_key_.Set("", GetArena());
         }
   #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:rabbitMQ.BasicProperties.routing_key)
+  // @@protoc_insertion_point(field_set_allocated:MyMQ.BasicProperties.routing_key)
 }
 
 // -------------------------------------------------------------------
 
 // Message_Payload
 
-// .rabbitMQ.BasicProperties properties = 1;
+// .MyMQ.BasicProperties properties = 1;
 inline bool Message_Payload::has_properties() const {
   bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
   PROTOBUF_ASSUME(!value || _impl_.properties_ != nullptr);
@@ -916,33 +916,33 @@ inline void Message_Payload::clear_properties() {
   if (_impl_.properties_ != nullptr) _impl_.properties_->Clear();
   _impl_._has_bits_[0] &= ~0x00000001u;
 }
-inline const ::rabbitMQ::BasicProperties& Message_Payload::_internal_properties() const {
+inline const ::MyMQ::BasicProperties& Message_Payload::_internal_properties() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
-  const ::rabbitMQ::BasicProperties* p = _impl_.properties_;
-  return p != nullptr ? *p : reinterpret_cast<const ::rabbitMQ::BasicProperties&>(::rabbitMQ::_BasicProperties_default_instance_);
+  const ::MyMQ::BasicProperties* p = _impl_.properties_;
+  return p != nullptr ? *p : reinterpret_cast<const ::MyMQ::BasicProperties&>(::MyMQ::_BasicProperties_default_instance_);
 }
-inline const ::rabbitMQ::BasicProperties& Message_Payload::properties() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:rabbitMQ.Message.Payload.properties)
+inline const ::MyMQ::BasicProperties& Message_Payload::properties() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:MyMQ.Message.Payload.properties)
   return _internal_properties();
 }
-inline void Message_Payload::unsafe_arena_set_allocated_properties(::rabbitMQ::BasicProperties* value) {
+inline void Message_Payload::unsafe_arena_set_allocated_properties(::MyMQ::BasicProperties* value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   if (GetArena() == nullptr) {
     delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.properties_);
   }
-  _impl_.properties_ = reinterpret_cast<::rabbitMQ::BasicProperties*>(value);
+  _impl_.properties_ = reinterpret_cast<::MyMQ::BasicProperties*>(value);
   if (value != nullptr) {
     _impl_._has_bits_[0] |= 0x00000001u;
   } else {
     _impl_._has_bits_[0] &= ~0x00000001u;
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:rabbitMQ.Message.Payload.properties)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:MyMQ.Message.Payload.properties)
 }
-inline ::rabbitMQ::BasicProperties* Message_Payload::release_properties() {
+inline ::MyMQ::BasicProperties* Message_Payload::release_properties() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
 
   _impl_._has_bits_[0] &= ~0x00000001u;
-  ::rabbitMQ::BasicProperties* released = _impl_.properties_;
+  ::MyMQ::BasicProperties* released = _impl_.properties_;
   _impl_.properties_ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
   auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
@@ -957,30 +957,30 @@ inline ::rabbitMQ::BasicProperties* Message_Payload::release_properties() {
 #endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
   return released;
 }
-inline ::rabbitMQ::BasicProperties* Message_Payload::unsafe_arena_release_properties() {
+inline ::MyMQ::BasicProperties* Message_Payload::unsafe_arena_release_properties() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  // @@protoc_insertion_point(field_release:rabbitMQ.Message.Payload.properties)
+  // @@protoc_insertion_point(field_release:MyMQ.Message.Payload.properties)
 
   _impl_._has_bits_[0] &= ~0x00000001u;
-  ::rabbitMQ::BasicProperties* temp = _impl_.properties_;
+  ::MyMQ::BasicProperties* temp = _impl_.properties_;
   _impl_.properties_ = nullptr;
   return temp;
 }
-inline ::rabbitMQ::BasicProperties* Message_Payload::_internal_mutable_properties() {
+inline ::MyMQ::BasicProperties* Message_Payload::_internal_mutable_properties() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   if (_impl_.properties_ == nullptr) {
-    auto* p = ::google::protobuf::Message::DefaultConstruct<::rabbitMQ::BasicProperties>(GetArena());
-    _impl_.properties_ = reinterpret_cast<::rabbitMQ::BasicProperties*>(p);
+    auto* p = ::google::protobuf::Message::DefaultConstruct<::MyMQ::BasicProperties>(GetArena());
+    _impl_.properties_ = reinterpret_cast<::MyMQ::BasicProperties*>(p);
   }
   return _impl_.properties_;
 }
-inline ::rabbitMQ::BasicProperties* Message_Payload::mutable_properties() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+inline ::MyMQ::BasicProperties* Message_Payload::mutable_properties() ABSL_ATTRIBUTE_LIFETIME_BOUND {
   _impl_._has_bits_[0] |= 0x00000001u;
-  ::rabbitMQ::BasicProperties* _msg = _internal_mutable_properties();
-  // @@protoc_insertion_point(field_mutable:rabbitMQ.Message.Payload.properties)
+  ::MyMQ::BasicProperties* _msg = _internal_mutable_properties();
+  // @@protoc_insertion_point(field_mutable:MyMQ.Message.Payload.properties)
   return _msg;
 }
-inline void Message_Payload::set_allocated_properties(::rabbitMQ::BasicProperties* value) {
+inline void Message_Payload::set_allocated_properties(::MyMQ::BasicProperties* value) {
   ::google::protobuf::Arena* message_arena = GetArena();
   ::google::protobuf::internal::TSanWrite(&_impl_);
   if (message_arena == nullptr) {
@@ -997,8 +997,8 @@ inline void Message_Payload::set_allocated_properties(::rabbitMQ::BasicPropertie
     _impl_._has_bits_[0] &= ~0x00000001u;
   }
 
-  _impl_.properties_ = reinterpret_cast<::rabbitMQ::BasicProperties*>(value);
-  // @@protoc_insertion_point(field_set_allocated:rabbitMQ.Message.Payload.properties)
+  _impl_.properties_ = reinterpret_cast<::MyMQ::BasicProperties*>(value);
+  // @@protoc_insertion_point(field_set_allocated:MyMQ.Message.Payload.properties)
 }
 
 // string body = 2;
@@ -1008,7 +1008,7 @@ inline void Message_Payload::clear_body() {
 }
 inline const std::string& Message_Payload::body() const
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:rabbitMQ.Message.Payload.body)
+  // @@protoc_insertion_point(field_get:MyMQ.Message.Payload.body)
   return _internal_body();
 }
 template <typename Arg_, typename... Args_>
@@ -1016,11 +1016,11 @@ inline PROTOBUF_ALWAYS_INLINE void Message_Payload::set_body(Arg_&& arg,
                                                      Args_... args) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.body_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
-  // @@protoc_insertion_point(field_set:rabbitMQ.Message.Payload.body)
+  // @@protoc_insertion_point(field_set:MyMQ.Message.Payload.body)
 }
 inline std::string* Message_Payload::mutable_body() ABSL_ATTRIBUTE_LIFETIME_BOUND {
   std::string* _s = _internal_mutable_body();
-  // @@protoc_insertion_point(field_mutable:rabbitMQ.Message.Payload.body)
+  // @@protoc_insertion_point(field_mutable:MyMQ.Message.Payload.body)
   return _s;
 }
 inline const std::string& Message_Payload::_internal_body() const {
@@ -1037,7 +1037,7 @@ inline std::string* Message_Payload::_internal_mutable_body() {
 }
 inline std::string* Message_Payload::release_body() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  // @@protoc_insertion_point(field_release:rabbitMQ.Message.Payload.body)
+  // @@protoc_insertion_point(field_release:MyMQ.Message.Payload.body)
   return _impl_.body_.Release();
 }
 inline void Message_Payload::set_allocated_body(std::string* value) {
@@ -1048,7 +1048,7 @@ inline void Message_Payload::set_allocated_body(std::string* value) {
           _impl_.body_.Set("", GetArena());
         }
   #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:rabbitMQ.Message.Payload.body)
+  // @@protoc_insertion_point(field_set_allocated:MyMQ.Message.Payload.body)
 }
 
 // string valid = 3;
@@ -1058,7 +1058,7 @@ inline void Message_Payload::clear_valid() {
 }
 inline const std::string& Message_Payload::valid() const
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:rabbitMQ.Message.Payload.valid)
+  // @@protoc_insertion_point(field_get:MyMQ.Message.Payload.valid)
   return _internal_valid();
 }
 template <typename Arg_, typename... Args_>
@@ -1066,11 +1066,11 @@ inline PROTOBUF_ALWAYS_INLINE void Message_Payload::set_valid(Arg_&& arg,
                                                      Args_... args) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.valid_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
-  // @@protoc_insertion_point(field_set:rabbitMQ.Message.Payload.valid)
+  // @@protoc_insertion_point(field_set:MyMQ.Message.Payload.valid)
 }
 inline std::string* Message_Payload::mutable_valid() ABSL_ATTRIBUTE_LIFETIME_BOUND {
   std::string* _s = _internal_mutable_valid();
-  // @@protoc_insertion_point(field_mutable:rabbitMQ.Message.Payload.valid)
+  // @@protoc_insertion_point(field_mutable:MyMQ.Message.Payload.valid)
   return _s;
 }
 inline const std::string& Message_Payload::_internal_valid() const {
@@ -1087,7 +1087,7 @@ inline std::string* Message_Payload::_internal_mutable_valid() {
 }
 inline std::string* Message_Payload::release_valid() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  // @@protoc_insertion_point(field_release:rabbitMQ.Message.Payload.valid)
+  // @@protoc_insertion_point(field_release:MyMQ.Message.Payload.valid)
   return _impl_.valid_.Release();
 }
 inline void Message_Payload::set_allocated_valid(std::string* value) {
@@ -1098,14 +1098,14 @@ inline void Message_Payload::set_allocated_valid(std::string* value) {
           _impl_.valid_.Set("", GetArena());
         }
   #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:rabbitMQ.Message.Payload.valid)
+  // @@protoc_insertion_point(field_set_allocated:MyMQ.Message.Payload.valid)
 }
 
 // -------------------------------------------------------------------
 
 // Message
 
-// .rabbitMQ.Message.Payload payload = 1;
+// .MyMQ.Message.Payload payload = 1;
 inline bool Message::has_payload() const {
   bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
   PROTOBUF_ASSUME(!value || _impl_.payload_ != nullptr);
@@ -1116,33 +1116,33 @@ inline void Message::clear_payload() {
   if (_impl_.payload_ != nullptr) _impl_.payload_->Clear();
   _impl_._has_bits_[0] &= ~0x00000001u;
 }
-inline const ::rabbitMQ::Message_Payload& Message::_internal_payload() const {
+inline const ::MyMQ::Message_Payload& Message::_internal_payload() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
-  const ::rabbitMQ::Message_Payload* p = _impl_.payload_;
-  return p != nullptr ? *p : reinterpret_cast<const ::rabbitMQ::Message_Payload&>(::rabbitMQ::_Message_Payload_default_instance_);
+  const ::MyMQ::Message_Payload* p = _impl_.payload_;
+  return p != nullptr ? *p : reinterpret_cast<const ::MyMQ::Message_Payload&>(::MyMQ::_Message_Payload_default_instance_);
 }
-inline const ::rabbitMQ::Message_Payload& Message::payload() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:rabbitMQ.Message.payload)
+inline const ::MyMQ::Message_Payload& Message::payload() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:MyMQ.Message.payload)
   return _internal_payload();
 }
-inline void Message::unsafe_arena_set_allocated_payload(::rabbitMQ::Message_Payload* value) {
+inline void Message::unsafe_arena_set_allocated_payload(::MyMQ::Message_Payload* value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   if (GetArena() == nullptr) {
     delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.payload_);
   }
-  _impl_.payload_ = reinterpret_cast<::rabbitMQ::Message_Payload*>(value);
+  _impl_.payload_ = reinterpret_cast<::MyMQ::Message_Payload*>(value);
   if (value != nullptr) {
     _impl_._has_bits_[0] |= 0x00000001u;
   } else {
     _impl_._has_bits_[0] &= ~0x00000001u;
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:rabbitMQ.Message.payload)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:MyMQ.Message.payload)
 }
-inline ::rabbitMQ::Message_Payload* Message::release_payload() {
+inline ::MyMQ::Message_Payload* Message::release_payload() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
 
   _impl_._has_bits_[0] &= ~0x00000001u;
-  ::rabbitMQ::Message_Payload* released = _impl_.payload_;
+  ::MyMQ::Message_Payload* released = _impl_.payload_;
   _impl_.payload_ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
   auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
@@ -1157,30 +1157,30 @@ inline ::rabbitMQ::Message_Payload* Message::release_payload() {
 #endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
   return released;
 }
-inline ::rabbitMQ::Message_Payload* Message::unsafe_arena_release_payload() {
+inline ::MyMQ::Message_Payload* Message::unsafe_arena_release_payload() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  // @@protoc_insertion_point(field_release:rabbitMQ.Message.payload)
+  // @@protoc_insertion_point(field_release:MyMQ.Message.payload)
 
   _impl_._has_bits_[0] &= ~0x00000001u;
-  ::rabbitMQ::Message_Payload* temp = _impl_.payload_;
+  ::MyMQ::Message_Payload* temp = _impl_.payload_;
   _impl_.payload_ = nullptr;
   return temp;
 }
-inline ::rabbitMQ::Message_Payload* Message::_internal_mutable_payload() {
+inline ::MyMQ::Message_Payload* Message::_internal_mutable_payload() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   if (_impl_.payload_ == nullptr) {
-    auto* p = ::google::protobuf::Message::DefaultConstruct<::rabbitMQ::Message_Payload>(GetArena());
-    _impl_.payload_ = reinterpret_cast<::rabbitMQ::Message_Payload*>(p);
+    auto* p = ::google::protobuf::Message::DefaultConstruct<::MyMQ::Message_Payload>(GetArena());
+    _impl_.payload_ = reinterpret_cast<::MyMQ::Message_Payload*>(p);
   }
   return _impl_.payload_;
 }
-inline ::rabbitMQ::Message_Payload* Message::mutable_payload() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+inline ::MyMQ::Message_Payload* Message::mutable_payload() ABSL_ATTRIBUTE_LIFETIME_BOUND {
   _impl_._has_bits_[0] |= 0x00000001u;
-  ::rabbitMQ::Message_Payload* _msg = _internal_mutable_payload();
-  // @@protoc_insertion_point(field_mutable:rabbitMQ.Message.payload)
+  ::MyMQ::Message_Payload* _msg = _internal_mutable_payload();
+  // @@protoc_insertion_point(field_mutable:MyMQ.Message.payload)
   return _msg;
 }
-inline void Message::set_allocated_payload(::rabbitMQ::Message_Payload* value) {
+inline void Message::set_allocated_payload(::MyMQ::Message_Payload* value) {
   ::google::protobuf::Arena* message_arena = GetArena();
   ::google::protobuf::internal::TSanWrite(&_impl_);
   if (message_arena == nullptr) {
@@ -1197,8 +1197,8 @@ inline void Message::set_allocated_payload(::rabbitMQ::Message_Payload* value) {
     _impl_._has_bits_[0] &= ~0x00000001u;
   }
 
-  _impl_.payload_ = reinterpret_cast<::rabbitMQ::Message_Payload*>(value);
-  // @@protoc_insertion_point(field_set_allocated:rabbitMQ.Message.payload)
+  _impl_.payload_ = reinterpret_cast<::MyMQ::Message_Payload*>(value);
+  // @@protoc_insertion_point(field_set_allocated:MyMQ.Message.payload)
 }
 
 // uint32 offset = 2;
@@ -1207,12 +1207,12 @@ inline void Message::clear_offset() {
   _impl_.offset_ = 0u;
 }
 inline ::uint32_t Message::offset() const {
-  // @@protoc_insertion_point(field_get:rabbitMQ.Message.offset)
+  // @@protoc_insertion_point(field_get:MyMQ.Message.offset)
   return _internal_offset();
 }
 inline void Message::set_offset(::uint32_t value) {
   _internal_set_offset(value);
-  // @@protoc_insertion_point(field_set:rabbitMQ.Message.offset)
+  // @@protoc_insertion_point(field_set:MyMQ.Message.offset)
 }
 inline ::uint32_t Message::_internal_offset() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
@@ -1229,12 +1229,12 @@ inline void Message::clear_length() {
   _impl_.length_ = 0u;
 }
 inline ::uint32_t Message::length() const {
-  // @@protoc_insertion_point(field_get:rabbitMQ.Message.length)
+  // @@protoc_insertion_point(field_get:MyMQ.Message.length)
   return _internal_length();
 }
 inline void Message::set_length(::uint32_t value) {
   _internal_set_length(value);
-  // @@protoc_insertion_point(field_set:rabbitMQ.Message.length)
+  // @@protoc_insertion_point(field_set:MyMQ.Message.length)
 }
 inline ::uint32_t Message::_internal_length() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
@@ -1250,23 +1250,23 @@ inline void Message::_internal_set_length(::uint32_t value) {
 #endif  // __GNUC__
 
 // @@protoc_insertion_point(namespace_scope)
-}  // namespace rabbitMQ
+}  // namespace MyMQ
 
 
 namespace google {
 namespace protobuf {
 
 template <>
-struct is_proto_enum<::rabbitMQ::ExchangeType> : std::true_type {};
+struct is_proto_enum<::MyMQ::ExchangeType> : std::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor<::rabbitMQ::ExchangeType>() {
-  return ::rabbitMQ::ExchangeType_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor<::MyMQ::ExchangeType>() {
+  return ::MyMQ::ExchangeType_descriptor();
 }
 template <>
-struct is_proto_enum<::rabbitMQ::DeliveryMode> : std::true_type {};
+struct is_proto_enum<::MyMQ::DeliveryMode> : std::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor<::rabbitMQ::DeliveryMode>() {
-  return ::rabbitMQ::DeliveryMode_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor<::MyMQ::DeliveryMode>() {
+  return ::MyMQ::DeliveryMode_descriptor();
 }
 
 }  // namespace protobuf

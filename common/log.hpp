@@ -12,7 +12,7 @@
 #include <spdlog/sinks/stdout_color_sinks.h>
 #include <iostream>
 
-namespace rabbitMQ {
+namespace MyMQ {
 //TODO 初始化日记 完善
     class Log {
     public:

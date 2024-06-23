@@ -23,7 +23,7 @@ PROTOBUF_PRAGMA_INIT_SEG
 namespace _pb = ::google::protobuf;
 namespace _pbi = ::google::protobuf::internal;
 namespace _fl = ::google::protobuf::internal::field_layout;
-namespace rabbitMQ {
+namespace MyMQ {
 
 inline constexpr BasicProperties::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
@@ -33,7 +33,7 @@ inline constexpr BasicProperties::Impl_::Impl_(
         routing_key_(
             &::google::protobuf::internal::fixed_address_empty_string,
             ::_pbi::ConstantInitialized()),
-        delivery_mode_{static_cast< ::rabbitMQ::DeliveryMode >(0)},
+        delivery_mode_{static_cast< ::MyMQ::DeliveryMode >(0)},
         _cached_size_{0} {}
 
 template <typename>
@@ -95,7 +95,7 @@ struct MessageDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 MessageDefaultTypeInternal _Message_default_instance_;
-}  // namespace rabbitMQ
+}  // namespace MyMQ
 static const ::_pb::EnumDescriptor* file_level_enum_descriptors_msg_2eproto[2];
 static constexpr const ::_pb::ServiceDescriptor**
     file_level_service_descriptors_msg_2eproto = nullptr;
@@ -103,41 +103,41 @@ const ::uint32_t
     TableStruct_msg_2eproto::offsets[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
         protodesc_cold) = {
         ~0u,  // no _has_bits_
-        PROTOBUF_FIELD_OFFSET(::rabbitMQ::BasicProperties, _internal_metadata_),
+        PROTOBUF_FIELD_OFFSET(::MyMQ::BasicProperties, _internal_metadata_),
         ~0u,  // no _extensions_
         ~0u,  // no _oneof_case_
         ~0u,  // no _weak_field_map_
         ~0u,  // no _inlined_string_donated_
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
-        PROTOBUF_FIELD_OFFSET(::rabbitMQ::BasicProperties, _impl_.id_),
-        PROTOBUF_FIELD_OFFSET(::rabbitMQ::BasicProperties, _impl_.delivery_mode_),
-        PROTOBUF_FIELD_OFFSET(::rabbitMQ::BasicProperties, _impl_.routing_key_),
-        PROTOBUF_FIELD_OFFSET(::rabbitMQ::Message_Payload, _impl_._has_bits_),
-        PROTOBUF_FIELD_OFFSET(::rabbitMQ::Message_Payload, _internal_metadata_),
+        PROTOBUF_FIELD_OFFSET(::MyMQ::BasicProperties, _impl_.id_),
+        PROTOBUF_FIELD_OFFSET(::MyMQ::BasicProperties, _impl_.delivery_mode_),
+        PROTOBUF_FIELD_OFFSET(::MyMQ::BasicProperties, _impl_.routing_key_),
+        PROTOBUF_FIELD_OFFSET(::MyMQ::Message_Payload, _impl_._has_bits_),
+        PROTOBUF_FIELD_OFFSET(::MyMQ::Message_Payload, _internal_metadata_),
         ~0u,  // no _extensions_
         ~0u,  // no _oneof_case_
         ~0u,  // no _weak_field_map_
         ~0u,  // no _inlined_string_donated_
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
-        PROTOBUF_FIELD_OFFSET(::rabbitMQ::Message_Payload, _impl_.properties_),
-        PROTOBUF_FIELD_OFFSET(::rabbitMQ::Message_Payload, _impl_.body_),
-        PROTOBUF_FIELD_OFFSET(::rabbitMQ::Message_Payload, _impl_.valid_),
+        PROTOBUF_FIELD_OFFSET(::MyMQ::Message_Payload, _impl_.properties_),
+        PROTOBUF_FIELD_OFFSET(::MyMQ::Message_Payload, _impl_.body_),
+        PROTOBUF_FIELD_OFFSET(::MyMQ::Message_Payload, _impl_.valid_),
         0,
         ~0u,
         ~0u,
-        PROTOBUF_FIELD_OFFSET(::rabbitMQ::Message, _impl_._has_bits_),
-        PROTOBUF_FIELD_OFFSET(::rabbitMQ::Message, _internal_metadata_),
+        PROTOBUF_FIELD_OFFSET(::MyMQ::Message, _impl_._has_bits_),
+        PROTOBUF_FIELD_OFFSET(::MyMQ::Message, _internal_metadata_),
         ~0u,  // no _extensions_
         ~0u,  // no _oneof_case_
         ~0u,  // no _weak_field_map_
         ~0u,  // no _inlined_string_donated_
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
-        PROTOBUF_FIELD_OFFSET(::rabbitMQ::Message, _impl_.payload_),
-        PROTOBUF_FIELD_OFFSET(::rabbitMQ::Message, _impl_.offset_),
-        PROTOBUF_FIELD_OFFSET(::rabbitMQ::Message, _impl_.length_),
+        PROTOBUF_FIELD_OFFSET(::MyMQ::Message, _impl_.payload_),
+        PROTOBUF_FIELD_OFFSET(::MyMQ::Message, _impl_.offset_),
+        PROTOBUF_FIELD_OFFSET(::MyMQ::Message, _impl_.length_),
         0,
         ~0u,
         ~0u,
@@ -145,34 +145,34 @@ const ::uint32_t
 
 static const ::_pbi::MigrationSchema
     schemas[] ABSL_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-        {0, -1, -1, sizeof(::rabbitMQ::BasicProperties)},
-        {11, 22, -1, sizeof(::rabbitMQ::Message_Payload)},
-        {25, 36, -1, sizeof(::rabbitMQ::Message)},
+        {0, -1, -1, sizeof(::MyMQ::BasicProperties)},
+        {11, 22, -1, sizeof(::MyMQ::Message_Payload)},
+        {25, 36, -1, sizeof(::MyMQ::Message)},
 };
 static const ::_pb::Message* const file_default_instances[] = {
-    &::rabbitMQ::_BasicProperties_default_instance_._instance,
-    &::rabbitMQ::_Message_Payload_default_instance_._instance,
-    &::rabbitMQ::_Message_default_instance_._instance,
+    &::MyMQ::_BasicProperties_default_instance_._instance,
+    &::MyMQ::_Message_Payload_default_instance_._instance,
+    &::MyMQ::_Message_default_instance_._instance,
 };
 const char descriptor_table_protodef_msg_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
-    "\n\tmsg.proto\022\010rabbitMQ\"a\n\017BasicProperties"
-    "\022\n\n\002id\030\001 \001(\t\022-\n\rdelivery_mode\030\002 \001(\0162\026.ra"
-    "bbitMQ.DeliveryMode\022\023\n\013routing_key\030\003 \001(\t"
-    "\"\254\001\n\007Message\022*\n\007payload\030\001 \001(\0132\031.rabbitMQ"
-    ".Message.Payload\022\016\n\006offset\030\002 \001(\r\022\016\n\006leng"
-    "th\030\003 \001(\r\032U\n\007Payload\022-\n\nproperties\030\001 \001(\0132"
-    "\031.rabbitMQ.BasicProperties\022\014\n\004body\030\002 \001(\t"
-    "\022\r\n\005valid\030\003 \001(\t*A\n\014ExchangeType\022\016\n\nUNKOW"
-    "NTYPE\020\000\022\n\n\006DIRECT\020\001\022\n\n\006FANOUT\020\002\022\t\n\005TOPIC"
-    "\020\003*:\n\014DeliveryMode\022\016\n\nUNKOWNMODE\020\000\022\r\n\tUN"
-    "DURABLE\020\001\022\013\n\007DURABLE\020\002b\006proto3"
+    "\n\tmsg.proto\022\004MyMQ\"]\n\017BasicProperties\022\n\n\002"
+    "id\030\001 \001(\t\022)\n\rdelivery_mode\030\002 \001(\0162\022.MyMQ.D"
+    "eliveryMode\022\023\n\013routing_key\030\003 \001(\t\"\244\001\n\007Mes"
+    "sage\022&\n\007payload\030\001 \001(\0132\025.MyMQ.Message.Pay"
+    "load\022\016\n\006offset\030\002 \001(\r\022\016\n\006length\030\003 \001(\r\032Q\n\007"
+    "Payload\022)\n\nproperties\030\001 \001(\0132\025.MyMQ.Basic"
+    "Properties\022\014\n\004body\030\002 \001(\t\022\r\n\005valid\030\003 \001(\t*"
+    "A\n\014ExchangeType\022\016\n\nUNKOWNTYPE\020\000\022\n\n\006DIREC"
+    "T\020\001\022\n\n\006FANOUT\020\002\022\t\n\005TOPIC\020\003*:\n\014DeliveryMo"
+    "de\022\016\n\nUNKOWNMODE\020\000\022\r\n\tUNDURABLE\020\001\022\013\n\007DUR"
+    "ABLE\020\002b\006proto3"
 };
 static ::absl::once_flag descriptor_table_msg_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_msg_2eproto = {
     false,
     false,
-    430,
+    414,
     descriptor_table_protodef_msg_2eproto,
     "msg.proto",
     &descriptor_table_msg_2eproto_once,
@@ -185,7 +185,7 @@ PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_msg_2eproto = 
     file_level_enum_descriptors_msg_2eproto,
     file_level_service_descriptors_msg_2eproto,
 };
-namespace rabbitMQ {
+namespace MyMQ {
 const ::google::protobuf::EnumDescriptor* ExchangeType_descriptor() {
   ::google::protobuf::internal::AssignDescriptors(&descriptor_table_msg_2eproto);
   return file_level_enum_descriptors_msg_2eproto[0];
@@ -213,11 +213,11 @@ class BasicProperties::_Internal {
 BasicProperties::BasicProperties(::google::protobuf::Arena* arena)
     : ::google::protobuf::Message(arena) {
   SharedCtor(arena);
-  // @@protoc_insertion_point(arena_constructor:rabbitMQ.BasicProperties)
+  // @@protoc_insertion_point(arena_constructor:MyMQ.BasicProperties)
 }
 inline PROTOBUF_NDEBUG_INLINE BasicProperties::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
-    const Impl_& from, const ::rabbitMQ::BasicProperties& from_msg)
+    const Impl_& from, const ::MyMQ::BasicProperties& from_msg)
       : id_(arena, from.id_),
         routing_key_(arena, from.routing_key_),
         _cached_size_{0} {}
@@ -233,7 +233,7 @@ BasicProperties::BasicProperties(
   new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
   _impl_.delivery_mode_ = from._impl_.delivery_mode_;
 
-  // @@protoc_insertion_point(copy_constructor:rabbitMQ.BasicProperties)
+  // @@protoc_insertion_point(copy_constructor:MyMQ.BasicProperties)
 }
 inline PROTOBUF_NDEBUG_INLINE BasicProperties::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
@@ -247,7 +247,7 @@ inline void BasicProperties::SharedCtor(::_pb::Arena* arena) {
   _impl_.delivery_mode_ = {};
 }
 BasicProperties::~BasicProperties() {
-  // @@protoc_insertion_point(destructor:rabbitMQ.BasicProperties)
+  // @@protoc_insertion_point(destructor:MyMQ.BasicProperties)
   _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   SharedDtor();
 }
@@ -279,7 +279,7 @@ BasicProperties::GetClassData() const {
   return _data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<2, 3, 0, 46, 2> BasicProperties::_table_ = {
+const ::_pbi::TcParseTable<2, 3, 0, 42, 2> BasicProperties::_table_ = {
   {
     0,  // no _has_bits_
     0, // no _extensions_
@@ -294,14 +294,14 @@ const ::_pbi::TcParseTable<2, 3, 0, 46, 2> BasicProperties::_table_ = {
     nullptr,  // post_loop_handler
     ::_pbi::TcParser::GenericFallback,  // fallback
     #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
-    ::_pbi::TcParser::GetTable<::rabbitMQ::BasicProperties>(),  // to_prefetch
+    ::_pbi::TcParser::GetTable<::MyMQ::BasicProperties>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
     {::_pbi::TcParser::MiniParse, {}},
     // string id = 1;
     {::_pbi::TcParser::FastUS1,
      {10, 63, 0, PROTOBUF_FIELD_OFFSET(BasicProperties, _impl_.id_)}},
-    // .rabbitMQ.DeliveryMode delivery_mode = 2;
+    // .MyMQ.DeliveryMode delivery_mode = 2;
     {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(BasicProperties, _impl_.delivery_mode_), 63>(),
      {16, 63, 0, PROTOBUF_FIELD_OFFSET(BasicProperties, _impl_.delivery_mode_)}},
     // string routing_key = 3;
@@ -313,7 +313,7 @@ const ::_pbi::TcParseTable<2, 3, 0, 46, 2> BasicProperties::_table_ = {
     // string id = 1;
     {PROTOBUF_FIELD_OFFSET(BasicProperties, _impl_.id_), 0, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
-    // .rabbitMQ.DeliveryMode delivery_mode = 2;
+    // .MyMQ.DeliveryMode delivery_mode = 2;
     {PROTOBUF_FIELD_OFFSET(BasicProperties, _impl_.delivery_mode_), 0, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kOpenEnum)},
     // string routing_key = 3;
@@ -322,15 +322,15 @@ const ::_pbi::TcParseTable<2, 3, 0, 46, 2> BasicProperties::_table_ = {
   }},
   // no aux_entries
   {{
-    "\30\2\0\13\0\0\0\0"
-    "rabbitMQ.BasicProperties"
+    "\24\2\0\13\0\0\0\0"
+    "MyMQ.BasicProperties"
     "id"
     "routing_key"
   }},
 };
 
 PROTOBUF_NOINLINE void BasicProperties::Clear() {
-// @@protoc_insertion_point(message_clear_start:rabbitMQ.BasicProperties)
+// @@protoc_insertion_point(message_clear_start:MyMQ.BasicProperties)
   ::google::protobuf::internal::TSanWrite(&_impl_);
   ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
@@ -345,7 +345,7 @@ PROTOBUF_NOINLINE void BasicProperties::Clear() {
 ::uint8_t* BasicProperties::_InternalSerialize(
     ::uint8_t* target,
     ::google::protobuf::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:rabbitMQ.BasicProperties)
+  // @@protoc_insertion_point(serialize_to_array_start:MyMQ.BasicProperties)
   ::uint32_t cached_has_bits = 0;
   (void)cached_has_bits;
 
@@ -353,11 +353,11 @@ PROTOBUF_NOINLINE void BasicProperties::Clear() {
   if (!this->_internal_id().empty()) {
     const std::string& _s = this->_internal_id();
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "rabbitMQ.BasicProperties.id");
+        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "MyMQ.BasicProperties.id");
     target = stream->WriteStringMaybeAliased(1, _s, target);
   }
 
-  // .rabbitMQ.DeliveryMode delivery_mode = 2;
+  // .MyMQ.DeliveryMode delivery_mode = 2;
   if (this->_internal_delivery_mode() != 0) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteEnumToArray(
@@ -368,7 +368,7 @@ PROTOBUF_NOINLINE void BasicProperties::Clear() {
   if (!this->_internal_routing_key().empty()) {
     const std::string& _s = this->_internal_routing_key();
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "rabbitMQ.BasicProperties.routing_key");
+        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "MyMQ.BasicProperties.routing_key");
     target = stream->WriteStringMaybeAliased(3, _s, target);
   }
 
@@ -377,12 +377,12 @@ PROTOBUF_NOINLINE void BasicProperties::Clear() {
         ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
             _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:rabbitMQ.BasicProperties)
+  // @@protoc_insertion_point(serialize_to_array_end:MyMQ.BasicProperties)
   return target;
 }
 
 ::size_t BasicProperties::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:rabbitMQ.BasicProperties)
+// @@protoc_insertion_point(message_byte_size_start:MyMQ.BasicProperties)
   ::size_t total_size = 0;
 
   ::uint32_t cached_has_bits = 0;
@@ -402,7 +402,7 @@ PROTOBUF_NOINLINE void BasicProperties::Clear() {
                                     this->_internal_routing_key());
   }
 
-  // .rabbitMQ.DeliveryMode delivery_mode = 2;
+  // .MyMQ.DeliveryMode delivery_mode = 2;
   if (this->_internal_delivery_mode() != 0) {
     total_size += 1 +
                   ::_pbi::WireFormatLite::EnumSize(this->_internal_delivery_mode());
@@ -415,7 +415,7 @@ PROTOBUF_NOINLINE void BasicProperties::Clear() {
 void BasicProperties::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
   auto* const _this = static_cast<BasicProperties*>(&to_msg);
   auto& from = static_cast<const BasicProperties&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:rabbitMQ.BasicProperties)
+  // @@protoc_insertion_point(class_specific_merge_from_start:MyMQ.BasicProperties)
   ABSL_DCHECK_NE(&from, _this);
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -433,7 +433,7 @@ void BasicProperties::MergeImpl(::google::protobuf::MessageLite& to_msg, const :
 }
 
 void BasicProperties::CopyFrom(const BasicProperties& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:rabbitMQ.BasicProperties)
+// @@protoc_insertion_point(class_specific_copy_from_start:MyMQ.BasicProperties)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -466,11 +466,11 @@ class Message_Payload::_Internal {
 Message_Payload::Message_Payload(::google::protobuf::Arena* arena)
     : ::google::protobuf::Message(arena) {
   SharedCtor(arena);
-  // @@protoc_insertion_point(arena_constructor:rabbitMQ.Message.Payload)
+  // @@protoc_insertion_point(arena_constructor:MyMQ.Message.Payload)
 }
 inline PROTOBUF_NDEBUG_INLINE Message_Payload::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
-    const Impl_& from, const ::rabbitMQ::Message_Payload& from_msg)
+    const Impl_& from, const ::MyMQ::Message_Payload& from_msg)
       : _has_bits_{from._has_bits_},
         _cached_size_{0},
         body_(arena, from.body_),
@@ -486,11 +486,11 @@ Message_Payload::Message_Payload(
       from._internal_metadata_);
   new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
   ::uint32_t cached_has_bits = _impl_._has_bits_[0];
-  _impl_.properties_ = (cached_has_bits & 0x00000001u) ? ::google::protobuf::Message::CopyConstruct<::rabbitMQ::BasicProperties>(
+  _impl_.properties_ = (cached_has_bits & 0x00000001u) ? ::google::protobuf::Message::CopyConstruct<::MyMQ::BasicProperties>(
                               arena, *from._impl_.properties_)
                         : nullptr;
 
-  // @@protoc_insertion_point(copy_constructor:rabbitMQ.Message.Payload)
+  // @@protoc_insertion_point(copy_constructor:MyMQ.Message.Payload)
 }
 inline PROTOBUF_NDEBUG_INLINE Message_Payload::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
@@ -504,7 +504,7 @@ inline void Message_Payload::SharedCtor(::_pb::Arena* arena) {
   _impl_.properties_ = {};
 }
 Message_Payload::~Message_Payload() {
-  // @@protoc_insertion_point(destructor:rabbitMQ.Message.Payload)
+  // @@protoc_insertion_point(destructor:MyMQ.Message.Payload)
   _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   SharedDtor();
 }
@@ -537,7 +537,7 @@ Message_Payload::GetClassData() const {
   return _data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<2, 3, 1, 42, 2> Message_Payload::_table_ = {
+const ::_pbi::TcParseTable<2, 3, 1, 38, 2> Message_Payload::_table_ = {
   {
     PROTOBUF_FIELD_OFFSET(Message_Payload, _impl_._has_bits_),
     0, // no _extensions_
@@ -552,11 +552,11 @@ const ::_pbi::TcParseTable<2, 3, 1, 42, 2> Message_Payload::_table_ = {
     nullptr,  // post_loop_handler
     ::_pbi::TcParser::GenericFallback,  // fallback
     #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
-    ::_pbi::TcParser::GetTable<::rabbitMQ::Message_Payload>(),  // to_prefetch
+    ::_pbi::TcParser::GetTable<::MyMQ::Message_Payload>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
     {::_pbi::TcParser::MiniParse, {}},
-    // .rabbitMQ.BasicProperties properties = 1;
+    // .MyMQ.BasicProperties properties = 1;
     {::_pbi::TcParser::FastMtS1,
      {10, 0, 0, PROTOBUF_FIELD_OFFSET(Message_Payload, _impl_.properties_)}},
     // string body = 2;
@@ -568,7 +568,7 @@ const ::_pbi::TcParseTable<2, 3, 1, 42, 2> Message_Payload::_table_ = {
   }}, {{
     65535, 65535
   }}, {{
-    // .rabbitMQ.BasicProperties properties = 1;
+    // .MyMQ.BasicProperties properties = 1;
     {PROTOBUF_FIELD_OFFSET(Message_Payload, _impl_.properties_), _Internal::kHasBitsOffset + 0, 0,
     (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
     // string body = 2;
@@ -578,17 +578,17 @@ const ::_pbi::TcParseTable<2, 3, 1, 42, 2> Message_Payload::_table_ = {
     {PROTOBUF_FIELD_OFFSET(Message_Payload, _impl_.valid_), -1, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
   }}, {{
-    {::_pbi::TcParser::GetTable<::rabbitMQ::BasicProperties>()},
+    {::_pbi::TcParser::GetTable<::MyMQ::BasicProperties>()},
   }}, {{
-    "\30\0\4\5\0\0\0\0"
-    "rabbitMQ.Message.Payload"
+    "\24\0\4\5\0\0\0\0"
+    "MyMQ.Message.Payload"
     "body"
     "valid"
   }},
 };
 
 PROTOBUF_NOINLINE void Message_Payload::Clear() {
-// @@protoc_insertion_point(message_clear_start:rabbitMQ.Message.Payload)
+// @@protoc_insertion_point(message_clear_start:MyMQ.Message.Payload)
   ::google::protobuf::internal::TSanWrite(&_impl_);
   ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
@@ -608,12 +608,12 @@ PROTOBUF_NOINLINE void Message_Payload::Clear() {
 ::uint8_t* Message_Payload::_InternalSerialize(
     ::uint8_t* target,
     ::google::protobuf::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:rabbitMQ.Message.Payload)
+  // @@protoc_insertion_point(serialize_to_array_start:MyMQ.Message.Payload)
   ::uint32_t cached_has_bits = 0;
   (void)cached_has_bits;
 
   cached_has_bits = _impl_._has_bits_[0];
-  // .rabbitMQ.BasicProperties properties = 1;
+  // .MyMQ.BasicProperties properties = 1;
   if (cached_has_bits & 0x00000001u) {
     target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
         1, *_impl_.properties_, _impl_.properties_->GetCachedSize(), target, stream);
@@ -623,7 +623,7 @@ PROTOBUF_NOINLINE void Message_Payload::Clear() {
   if (!this->_internal_body().empty()) {
     const std::string& _s = this->_internal_body();
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "rabbitMQ.Message.Payload.body");
+        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "MyMQ.Message.Payload.body");
     target = stream->WriteStringMaybeAliased(2, _s, target);
   }
 
@@ -631,7 +631,7 @@ PROTOBUF_NOINLINE void Message_Payload::Clear() {
   if (!this->_internal_valid().empty()) {
     const std::string& _s = this->_internal_valid();
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "rabbitMQ.Message.Payload.valid");
+        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "MyMQ.Message.Payload.valid");
     target = stream->WriteStringMaybeAliased(3, _s, target);
   }
 
@@ -640,12 +640,12 @@ PROTOBUF_NOINLINE void Message_Payload::Clear() {
         ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
             _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:rabbitMQ.Message.Payload)
+  // @@protoc_insertion_point(serialize_to_array_end:MyMQ.Message.Payload)
   return target;
 }
 
 ::size_t Message_Payload::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:rabbitMQ.Message.Payload)
+// @@protoc_insertion_point(message_byte_size_start:MyMQ.Message.Payload)
   ::size_t total_size = 0;
 
   ::uint32_t cached_has_bits = 0;
@@ -665,7 +665,7 @@ PROTOBUF_NOINLINE void Message_Payload::Clear() {
                                     this->_internal_valid());
   }
 
-  // .rabbitMQ.BasicProperties properties = 1;
+  // .MyMQ.BasicProperties properties = 1;
   cached_has_bits = _impl_._has_bits_[0];
   if (cached_has_bits & 0x00000001u) {
     total_size +=
@@ -680,7 +680,7 @@ void Message_Payload::MergeImpl(::google::protobuf::MessageLite& to_msg, const :
   auto* const _this = static_cast<Message_Payload*>(&to_msg);
   auto& from = static_cast<const Message_Payload&>(from_msg);
   ::google::protobuf::Arena* arena = _this->GetArena();
-  // @@protoc_insertion_point(class_specific_merge_from_start:rabbitMQ.Message.Payload)
+  // @@protoc_insertion_point(class_specific_merge_from_start:MyMQ.Message.Payload)
   ABSL_DCHECK_NE(&from, _this);
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -696,7 +696,7 @@ void Message_Payload::MergeImpl(::google::protobuf::MessageLite& to_msg, const :
     ABSL_DCHECK(from._impl_.properties_ != nullptr);
     if (_this->_impl_.properties_ == nullptr) {
       _this->_impl_.properties_ =
-          ::google::protobuf::Message::CopyConstruct<::rabbitMQ::BasicProperties>(arena, *from._impl_.properties_);
+          ::google::protobuf::Message::CopyConstruct<::MyMQ::BasicProperties>(arena, *from._impl_.properties_);
     } else {
       _this->_impl_.properties_->MergeFrom(*from._impl_.properties_);
     }
@@ -706,7 +706,7 @@ void Message_Payload::MergeImpl(::google::protobuf::MessageLite& to_msg, const :
 }
 
 void Message_Payload::CopyFrom(const Message_Payload& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:rabbitMQ.Message.Payload)
+// @@protoc_insertion_point(class_specific_copy_from_start:MyMQ.Message.Payload)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -740,11 +740,11 @@ class Message::_Internal {
 Message::Message(::google::protobuf::Arena* arena)
     : ::google::protobuf::Message(arena) {
   SharedCtor(arena);
-  // @@protoc_insertion_point(arena_constructor:rabbitMQ.Message)
+  // @@protoc_insertion_point(arena_constructor:MyMQ.Message)
 }
 inline PROTOBUF_NDEBUG_INLINE Message::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
-    const Impl_& from, const ::rabbitMQ::Message& from_msg)
+    const Impl_& from, const ::MyMQ::Message& from_msg)
       : _has_bits_{from._has_bits_},
         _cached_size_{0} {}
 
@@ -758,7 +758,7 @@ Message::Message(
       from._internal_metadata_);
   new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
   ::uint32_t cached_has_bits = _impl_._has_bits_[0];
-  _impl_.payload_ = (cached_has_bits & 0x00000001u) ? ::google::protobuf::Message::CopyConstruct<::rabbitMQ::Message_Payload>(
+  _impl_.payload_ = (cached_has_bits & 0x00000001u) ? ::google::protobuf::Message::CopyConstruct<::MyMQ::Message_Payload>(
                               arena, *from._impl_.payload_)
                         : nullptr;
   ::memcpy(reinterpret_cast<char *>(&_impl_) +
@@ -769,7 +769,7 @@ Message::Message(
                offsetof(Impl_, offset_) +
                sizeof(Impl_::length_));
 
-  // @@protoc_insertion_point(copy_constructor:rabbitMQ.Message)
+  // @@protoc_insertion_point(copy_constructor:MyMQ.Message)
 }
 inline PROTOBUF_NDEBUG_INLINE Message::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
@@ -786,7 +786,7 @@ inline void Message::SharedCtor(::_pb::Arena* arena) {
                sizeof(Impl_::length_));
 }
 Message::~Message() {
-  // @@protoc_insertion_point(destructor:rabbitMQ.Message)
+  // @@protoc_insertion_point(destructor:MyMQ.Message)
   _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   SharedDtor();
 }
@@ -832,11 +832,11 @@ const ::_pbi::TcParseTable<2, 3, 1, 0, 2> Message::_table_ = {
     nullptr,  // post_loop_handler
     ::_pbi::TcParser::GenericFallback,  // fallback
     #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
-    ::_pbi::TcParser::GetTable<::rabbitMQ::Message>(),  // to_prefetch
+    ::_pbi::TcParser::GetTable<::MyMQ::Message>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
     {::_pbi::TcParser::MiniParse, {}},
-    // .rabbitMQ.Message.Payload payload = 1;
+    // .MyMQ.Message.Payload payload = 1;
     {::_pbi::TcParser::FastMtS1,
      {10, 0, 0, PROTOBUF_FIELD_OFFSET(Message, _impl_.payload_)}},
     // uint32 offset = 2;
@@ -848,7 +848,7 @@ const ::_pbi::TcParseTable<2, 3, 1, 0, 2> Message::_table_ = {
   }}, {{
     65535, 65535
   }}, {{
-    // .rabbitMQ.Message.Payload payload = 1;
+    // .MyMQ.Message.Payload payload = 1;
     {PROTOBUF_FIELD_OFFSET(Message, _impl_.payload_), _Internal::kHasBitsOffset + 0, 0,
     (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
     // uint32 offset = 2;
@@ -858,13 +858,13 @@ const ::_pbi::TcParseTable<2, 3, 1, 0, 2> Message::_table_ = {
     {PROTOBUF_FIELD_OFFSET(Message, _impl_.length_), -1, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kUInt32)},
   }}, {{
-    {::_pbi::TcParser::GetTable<::rabbitMQ::Message_Payload>()},
+    {::_pbi::TcParser::GetTable<::MyMQ::Message_Payload>()},
   }}, {{
   }},
 };
 
 PROTOBUF_NOINLINE void Message::Clear() {
-// @@protoc_insertion_point(message_clear_start:rabbitMQ.Message)
+// @@protoc_insertion_point(message_clear_start:MyMQ.Message)
   ::google::protobuf::internal::TSanWrite(&_impl_);
   ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
@@ -885,12 +885,12 @@ PROTOBUF_NOINLINE void Message::Clear() {
 ::uint8_t* Message::_InternalSerialize(
     ::uint8_t* target,
     ::google::protobuf::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:rabbitMQ.Message)
+  // @@protoc_insertion_point(serialize_to_array_start:MyMQ.Message)
   ::uint32_t cached_has_bits = 0;
   (void)cached_has_bits;
 
   cached_has_bits = _impl_._has_bits_[0];
-  // .rabbitMQ.Message.Payload payload = 1;
+  // .MyMQ.Message.Payload payload = 1;
   if (cached_has_bits & 0x00000001u) {
     target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
         1, *_impl_.payload_, _impl_.payload_->GetCachedSize(), target, stream);
@@ -915,12 +915,12 @@ PROTOBUF_NOINLINE void Message::Clear() {
         ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
             _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:rabbitMQ.Message)
+  // @@protoc_insertion_point(serialize_to_array_end:MyMQ.Message)
   return target;
 }
 
 ::size_t Message::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:rabbitMQ.Message)
+// @@protoc_insertion_point(message_byte_size_start:MyMQ.Message)
   ::size_t total_size = 0;
 
   ::uint32_t cached_has_bits = 0;
@@ -928,7 +928,7 @@ PROTOBUF_NOINLINE void Message::Clear() {
   (void) cached_has_bits;
 
   ::_pbi::Prefetch5LinesFrom7Lines(reinterpret_cast<const void*>(this));
-  // .rabbitMQ.Message.Payload payload = 1;
+  // .MyMQ.Message.Payload payload = 1;
   cached_has_bits = _impl_._has_bits_[0];
   if (cached_has_bits & 0x00000001u) {
     total_size +=
@@ -955,7 +955,7 @@ void Message::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google:
   auto* const _this = static_cast<Message*>(&to_msg);
   auto& from = static_cast<const Message&>(from_msg);
   ::google::protobuf::Arena* arena = _this->GetArena();
-  // @@protoc_insertion_point(class_specific_merge_from_start:rabbitMQ.Message)
+  // @@protoc_insertion_point(class_specific_merge_from_start:MyMQ.Message)
   ABSL_DCHECK_NE(&from, _this);
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -965,7 +965,7 @@ void Message::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google:
     ABSL_DCHECK(from._impl_.payload_ != nullptr);
     if (_this->_impl_.payload_ == nullptr) {
       _this->_impl_.payload_ =
-          ::google::protobuf::Message::CopyConstruct<::rabbitMQ::Message_Payload>(arena, *from._impl_.payload_);
+          ::google::protobuf::Message::CopyConstruct<::MyMQ::Message_Payload>(arena, *from._impl_.payload_);
     } else {
       _this->_impl_.payload_->MergeFrom(*from._impl_.payload_);
     }
@@ -981,7 +981,7 @@ void Message::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google:
 }
 
 void Message::CopyFrom(const Message& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:rabbitMQ.Message)
+// @@protoc_insertion_point(class_specific_copy_from_start:MyMQ.Message)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -1004,7 +1004,7 @@ void Message::InternalSwap(Message* PROTOBUF_RESTRICT other) {
   return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // @@protoc_insertion_point(namespace_scope)
-}  // namespace rabbitMQ
+}  // namespace MyMQ
 namespace google {
 namespace protobuf {
 }  // namespace protobuf

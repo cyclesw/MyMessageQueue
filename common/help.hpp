@@ -14,7 +14,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-namespace rabbitMQ 
+namespace MyMQ
 {
     class SqliteHelper 
     {
