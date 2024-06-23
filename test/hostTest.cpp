@@ -4,7 +4,7 @@
 #include "host.hpp"
 #include <gtest/gtest.h>
 
-using namespace rabbitMQ;
+using namespace MyMQ;
 
 class VirtualHostTest : public testing::Test
 {

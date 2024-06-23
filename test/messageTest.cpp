@@ -1,7 +1,7 @@
 #include "message.hpp"
 #include <gtest/gtest.h>
 
-using namespace rabbitMQ;
+using namespace MyMQ;
 
 MessageManagerPtr mmp;
 MessageManagerPtr mmp1;

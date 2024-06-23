@@ -1,7 +1,7 @@
 #include "binding.hpp"
 #include <gtest/gtest.h>
 
-using namespace rabbitMQ;
+using namespace MyMQ;
 
 BindingManagerPtr bmp;
 
