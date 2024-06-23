@@ -39,5 +39,4 @@ cmake-build-debug/
 data
 
 # protofile
-./common/msg.pb.cc
-./common/msg.pb.h
+*pb.*
