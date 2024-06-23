@@ -37,3 +37,7 @@ build/
 cmake-build-debug/
 .idea/
 data
+
+# protofile
+./common/msg.pb.cc
+./common/msg.pb.h
