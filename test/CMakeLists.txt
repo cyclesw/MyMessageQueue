@@ -8,8 +8,8 @@ set(COMMON_SOURCES
 set(COMMON_LIBS
         PkgConfig::MyLib
         Boost::boost
-        Boost::test_exec_monitor
-        Boost::unit_test_framework
+        # Boost::test_exec_monitor
+        # Boost::unit_test_framework
 )
 
 # Function to create an executable and link common libraries
@@ -25,9 +25,13 @@ create_executable(MessageTest messageTest.cpp ${COMMON_SOURCES})
 create_executable(helperTest helperTest.cpp ${COMMON_SOURCES})
 create_executable(routeTest routeTest.cpp)
 create_executable(HostTest hostTest.cpp ${COMMON_SOURCES})
+create_executable(ConsumerTest consumerTest.cpp ${COMMON_SOURCES})
 
-# Specific libraries for helperTest
-
+# other
+#target_link_libraries(helperTest
+#        Boost::test_exec_monitor
+#        Boost::unit_test_framework
+#)
 
 #add_executable(BindingTest bindingTest.cpp
 #)

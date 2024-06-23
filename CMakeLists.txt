@@ -17,7 +17,8 @@ pkg_check_modules(MyLib REQUIRED IMPORTED_TARGET protobuf sqlite3 gtest spdlog)
 
 #set(PROTO_FILES ${PROJECT_SOURCE_DIR}/common/msg.proto)
 
-#protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS  ${PROTO_FILES} )
+# build.sh
+#protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS ../common/msg.proto)
 
 # set(GLOBAL_LIB 
 #     PkgConfig::MyLib
