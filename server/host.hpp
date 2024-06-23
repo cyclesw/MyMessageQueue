@@ -5,7 +5,7 @@
 #include "message.hpp"
 #include "msgqueue.hpp"
 
-namespace rabbitMQ
+namespace MyMQ
 {
     class VirtualHost;
 

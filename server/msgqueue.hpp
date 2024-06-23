@@ -3,7 +3,7 @@
 #include "help.hpp"
 
 // 队列数据管理模块
-namespace rabbitMQ
+namespace MyMQ
 {
     struct MsgQueue;
     class MsgQueueManager;

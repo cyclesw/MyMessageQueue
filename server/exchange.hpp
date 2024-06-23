@@ -5,7 +5,7 @@
 #include <google/protobuf/map.h>
 
 // 交换机模块
-namespace rabbitMQ 
+namespace MyMQ
 {
     struct Exchange;
     class ExchangeManager;

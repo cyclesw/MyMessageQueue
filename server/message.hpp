@@ -3,7 +3,7 @@
 
 
 // 消息管理模块
-namespace rabbitMQ {
+namespace MyMQ {
     #define DATAFILE_SUBFIX ".mqd"
     #define TMPFILE_SUBFIX ".mqd.tmp"
 

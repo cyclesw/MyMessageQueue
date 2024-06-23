@@ -5,7 +5,7 @@
 #include "help.hpp"
 
 
-namespace rabbitMQ 
+namespace MyMQ
 {
     struct Binding;
     class BindingMapper;
