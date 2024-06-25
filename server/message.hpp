@@ -12,6 +12,7 @@ namespace MyMQ {
     class MessageManager;
     class MessageMapper;
 
+    //FIXME MessagePtr 类型不明确
     using QueueMessagePtr = std::shared_ptr<QueueMessage>;
     using MessagePtr = std::shared_ptr<Message>;
     using MessageManagerPtr = std::shared_ptr<MessageManager>;

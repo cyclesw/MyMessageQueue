@@ -43,7 +43,7 @@ class ProtobufCodec : muduo::noncopyable
   };
 
   typedef std::function<void (const muduo::net::TcpConnectionPtr&,
-                                const MessagePtr&,
+                                const ::MessagePtr&,
                                 muduo::Timestamp)> ProtobufMessageCallback;
 
   typedef std::function<void (const muduo::net::TcpConnectionPtr&,

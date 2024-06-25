@@ -1,6 +1,5 @@
 #include "codec.h"
 #include "dispatcher.h"
-#include "log.hpp"
 #include "help.hpp"
 #include <gtest/gtest.h>
 

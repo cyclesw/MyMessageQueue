@@ -232,16 +232,16 @@ namespace MyMQ
             return true;
         }
 
-        void CloseChannel(const std::string& id)
+        void CloseChannel(const std::string& cid)
         {
             std::unique_lock<std::mutex> lock(_mutex);
-            _channels.erase(id);
+            _channels.erase(cid);
         }
 
-        ChannelPtr GetChannel(const std::string& id)
+        ChannelPtr GetChannel(const std::string& cid)
         {
             std::unique_lock<std::mutex> lock(_mutex);
-            return _channels.find(id)->second;
+            return _channels.find(cid)->second;
         }
     };
 }
