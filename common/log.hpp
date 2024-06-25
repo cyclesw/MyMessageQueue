@@ -4,7 +4,7 @@
 
 #pragma once
 
-// # ifdef SPDLOG_COMPILED_LIB
+#ifdef SPDLOG_COMPILED_LIB
 
 #define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_TRACE
 
@@ -60,7 +60,7 @@ namespace MyMQ {
 
 }
 
-// #else
+#else
 //[x]
 // #include <iostream>
 // #include <format>
@@ -93,4 +93,4 @@ namespace MyMQ {
 
 // }
 
-// #endif
+#endif

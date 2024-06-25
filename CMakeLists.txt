@@ -7,30 +7,87 @@ enable_testing()
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+
+message("\n--------------------包查询----------------------------")
+
 find_package(PkgConfig REQUIRED)
 find_package(Boost REQUIRED)
-find_package(Protobuf REQUIRED)
-find_package(spdlog REQUIRED)
+# find_package(Protobuf REQUIRED)
 
-pkg_check_modules(MyLib REQUIRED IMPORTED_TARGET protobuf sqlite3 gtest)
+pkg_check_modules(MyLib REQUIRED IMPORTED_TARGET protobuf sqlite3 spdlog)
+pkg_check_modules(Gtest IMPORTED_TARGET gtest)
+
+message("----------------------------------------------------\n")
 
 include_directories(${PROJECT_SOURCE_DIR}/common
                 ${PROJECT_SOURCE_DIR}/server
-                ${PROJECT_SOURCE_DIR}/demo
-                ${Protobuf_INCLUDE_DIRS}
                 ${CMAKE_CURRENT_BINARY_DIR}
 )       
 
+file(GLOB PROTO_FILES "${PROJECT_SOURCE_DIR}/common/*.proto")
 
-# set(PROTOBUF_OUTPUT_DIR ${PROJECT_SOURCE_DIR}/common)
-# FIXME [生成proto file bug?]
-PROTOBUF_GENERATE_CPP(PROTO_SRC PROTO_HDRS  ${PROJECT_SOURCE_DIR}/common/msg.proto)
+foreach(PROTO_FILE ${PROTO_FILES})
+    get_filename_component(PROTO_FILE_NAME ${PROTO_FILE} NAME_WE)
 
-add_executable(ProtoTest MyTest/protoTest.cc ${PROTO_SRC})
+    set(PROTO_SRC_FILE ${CMAKE_BINARY_DIR}/${PROTO_FILE_NAME}.pb.cc)
+    set(PROTO_HDR_FILE ${CMAKE_BINARY_DIR}/${PROTO_FILE_NAME}.pb.h)
 
-target_link_libraries(ProtoTest PkgConfig::MyLib)
+    if(NOT EXISTS ${PROTO_SRC_FILE} OR NOT EXISTS ${PROTO_HDR_FILE})
+        message("执行protoc指令: ${PROTO_FILE_NAME}")
+        execute_process(
+            COMMAND ${Protobuf_PROTOC_EXECUTABLE}
+                    --cpp_out=${CMAKE_BINARY_DIR}
+                    -I ${PROJECT_SOURCE_DIR}/common
+                    ${PROTO_FILE}   
+            RESULT_VARIABLE PROTOC_RESULT
+            ERROR_VARIABLE PROTOC_ERROR
+        )
+    endif()
 
-add_subdirectory(MyTest)
+    if(PROTOC_RESULT)
+        message(FATAL_ERROR "protoc 执行错误: ${PROTOC_ERROR}")
+    endif()
+endforeach()
+
+file(GLOB PROTO_SRCS "${CMAKE_BINARY_DIR}/*.pb.cc")
 
 
+set(COMMON_LIBS
+        PkgConfig::MyLib
+        Boost::boost
+)
+
+
+set(COMMON_SOURCES
+        ${PROTO_SRCS} 
+)
+
+message("\n-------------------条件变量测试-----------------------")
+message("Protobuf_PROTOC_EXECUTABLE: ${Protobuf_PROTOC_EXECUTABLE}")
+message("CMAKE_SOURCE_DIR: ${CMAKE_SOURCE_DIR}")
+message("PROJECT_SOURCE_DIR: ${PROJECT_SOURCE_DIR}")
+message("Gtest: ${GTEST_LIBRARIES}")
+message("spdlog: ${SPDLOG_LIBRARIES}")
+message("protobuf: ${PROTOBUF_LIBRARIES}")
+message("PROTO_SRCS: ${PROTO_SRCS}")
+message("Sqlite3: ${}")
+message("command result: ${PROTOC_RESULT}")
+message("comman error:${PROTOC_ERROR}")
+message("----------------------------------------------------\n")
+
+
+
+if(GTEST_FOUND)
+    message("gtest Found")
+    add_subdirectory(Test)
+else()
+    message("gtest Not Found!!")
+endif()
 # get_property(ALL_TARGETS GLOBAL PROPERTY ALL_TARGETS)
+
+# # FIXME [生成proto file bug?]
+# PROTOBUF_GENERATE_CPP(PROTO_SRC PROTO_HDRS  ${PROJECT_SOURCE_DIR}/common/msg.proto)
+# # PROTO_SRC: 只在上方指令执行后设置？
+# add_executable(ProtoTest Test/protoTest.cc ${PROTO_SRC})
+# # 
+# target_link_libraries(ProtoTest PkgConfig::MyLib)

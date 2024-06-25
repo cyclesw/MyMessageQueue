@@ -37,6 +37,11 @@ namespace MyMQ
             }
         }
 
+        ExchangePtr SelectExchange(const std::string& name)
+        {
+            return _emp->SelectExchange(name);
+        }
+
         QueueMap AllQueue()
         {
             return _mqmp->AllQueues();
@@ -50,7 +55,7 @@ namespace MyMQ
 
         bool DeclareExchange(const std::string& name,
             ExchangeType type, bool durable, bool auto_delete,
-            google::protobuf::Map<std::string, std::string>& args)
+            const google::protobuf::Map<std::string, std::string>& args)
         {
             return _emp->DeclareExchange(name, type, durable, auto_delete, args);
         }
@@ -59,7 +64,7 @@ namespace MyMQ
             bool qdurable,
             bool qexclusive,
             bool qauto_delete,
-            google::protobuf::Map<std::string, std::string>& args)
+            const google::protobuf::Map<std::string, std::string>& args)
         {
             _mmp->InitQueueManager(qname);
             return _mqmp->DeclareQueue(qname, qdurable, qexclusive, qauto_delete, args);

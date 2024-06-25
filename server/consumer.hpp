@@ -16,18 +16,18 @@ namespace MyMQ
     using ConsumerPtr = std::shared_ptr<Consumer>;
     using QueueConsumerPtr = std::shared_ptr<QueueConsumer>;
     using ConsumerManagerPtr = std::shared_ptr<ConsumerManager>;
-    using ConsumerCallback = std::function<void(const std::string, const BasicProperties*, const std::string&)>;
+    using ConsumerCallback = std::function<void(const std::string tag, const BasicProperties* properties, const std::string& msg) >;
 
     struct Consumer
     {
         std::string tag;
         std::string qname;
         bool autoAck;
-        ConsumerCallback cb;
+        ConsumerCallback callback;
 
         Consumer() = default;
         Consumer(const std::string& tag, const std::string& qname, const bool autoAck, const ConsumerCallback& callback)
-            :tag(tag), qname(qname), autoAck(autoAck), cb(callback)
+            :tag(tag), qname(qname), autoAck(autoAck), callback(callback)
         {}
     };
 

@@ -1,3 +1,4 @@
+#pragma once
 #include "help.hpp"
 #include "msg.pb.h"
 
