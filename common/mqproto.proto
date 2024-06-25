@@ -1,0 +1,128 @@
+syntax = "proto3";
+
+package MyMQ;
+
+import "msg.proto";
+
+message OpenChannelRequest
+{
+    string rid = 1;
+    string cid = 2;
+};
+
+message CloseChannelRequest
+{
+    string rid = 1;
+    string cid = 2;
+};
+
+message DeclareExchangeRequest
+{
+    string rid = 1;
+    string cid = 2;
+    string exchangeName = 3;
+    ExchangeType exchangeType = 4;
+    bool durable = 5;
+    bool autoDelete = 6;
+    map<string, string> args = 7;
+};
+
+message DeleteExchangeRequest
+{
+    string rid = 1;
+    string cid = 2;
+    string exchangeName = 3;
+};
+
+message DeleteQueueRequest
+{
+    string rid = 1;
+    string cid = 2;
+    string queueName = 3;
+};
+
+// 定义队列
+message DeclareQueueRequest
+{
+    string rid = 1;
+    string cid = 2;
+    string queueName = 3;
+    bool exclusive = 4;
+    bool durable = 5;
+    bool autoDelete = 6;
+    map<string, string> args = 7;
+};
+
+message QueueBindRequest
+{
+    string rid = 1;
+    string cid = 2;
+    string exchangeName = 3;
+    string queueName = 4;
+    string bindingKey = 5;
+}
+
+// 队列
+message QueueUnBindRequest
+{
+    string rid = 1;
+    string cid = 2;
+    string exchangeName = 3;
+    string queueName = 4;
+};
+
+// 订阅发布
+message BasicPushlishRequest
+{
+    string rid = 1;
+    string cid = 2;
+    string exchangeName = 3;
+    string body = 4;
+    BasicProperties properties = 5;
+};
+
+// 消息确认
+message BasicAckRequest
+{
+    string cid = 1;
+    string rid = 2;
+    string queueName = 3;
+    string messageId = 4;
+};
+
+// 队列的订阅
+message BasicConsumeRequest
+{
+    string rid = 1;
+    string cid = 2;
+    string consumerTag = 3;
+    string queueName = 4;
+    bool autoAck = 5;
+};
+
+// 信息推送
+message BasicConsumeResponse
+{
+    string cid = 1;
+    string consumerTag = 2;
+    string body = 3;
+    BasicProperties properties = 4;
+};
+
+// 订阅的取消
+message BasicCancelRequest 
+{
+    string rid = 1;
+    string cid = 2;
+    string consumerTag = 3;
+    string queueName = 4;
+};
+
+
+// 通用响应
+message BasicCommonResponse
+{
+    string rid = 1;
+    string cid = 2;
+    bool ok = 3;
+};
