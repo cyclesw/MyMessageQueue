@@ -6,26 +6,27 @@
 #define CLIENT_CONSUMER_HPP
 
 #include "msg.pb.h"
+#include "log.hpp"
 #include <unordered_map>
 #include <mutex>
 
 namespace MyMQ {
-    struct ClientConsumer;
+    struct Consumer;
 
-    using ClientConsumerCallback = std::function<void(const std::string, const BasicProperties*, const std::string)>;
-    using ClientConsumerPtr = std::shared_ptr<ClientConsumer>;
+    using ConsumerCallback = std::function<void(const std::string, const BasicProperties*, const std::string)>;
+    using ConsumerPtr = std::shared_ptr<Consumer>;
 
-    struct ClientConsumer {
+    struct Consumer {
         std::string tag;
         std::string qname;
-        bool autoAck;
-        ClientConsumerCallback callback;
+        bool autoAck{};
+        ConsumerCallback callback;
 
-        ClientConsumer() {
-            LOG_DEBUG("new Consumer: {}", this);
+        Consumer() {
+            LOG_DEBUG("new Consumer: {}", static_cast<void*>(this));
         }
 
-        ClientConsumer(const std::string& ctag, const std::string& qname, bool auto_ack, ClientConsumerCallback& cb)
+        Consumer(const std::string& ctag, const std::string& qname, bool auto_ack, ConsumerCallback& cb)
             :tag(ctag), qname(qname), autoAck(auto_ack), callback(std::move(callback)) {}
 
 

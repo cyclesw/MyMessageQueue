@@ -5,4 +5,19 @@
 #ifndef WORKER_HPP
 #define WORKER_HPP
 
+#include "threadpool.hpp"
+#include <muduo/net/EventLoopThread.h>
+
+namespace MyMQ {
+    class AsyncWorker;
+
+    using AsyncWorkerPtr = std::shared_ptr<AsyncWorker>;
+
+    class AsyncWorker {
+    public:
+        muduo::net::EventLoopThread _loop;
+        ThreadPool* _pool;
+    };
+}
+
 #endif //WORKER_HPP

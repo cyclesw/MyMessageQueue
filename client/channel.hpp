@@ -5,19 +5,29 @@
 #ifndef CLIENT_CHANNEL_HPP
 #define CLIENT_CHANNEL_HPP
 
-#include <channel.hpp>
-
 #include "consumer.hpp"
 #include "codec.h"
 #include "dispatcher.h"
 #include "help.hpp"
 #include "mqproto.pb.h"
+#include "log.hpp"
 #include <condition_variable>
+#include <memory>
 #include <muduo/net/TcpConnection.h>
+
 
 namespace MyMQ
 {
-    class ClientChannel
+    class Channel;
+    class ChannelManager;
+
+    using ChannelManagerPtr = std::shared_ptr<ChannelManager>;
+    using ChannelPtr = std::shared_ptr<Channel>;
+    using ProtobufCodecPtr = std::shared_ptr<ProtobufCodec>;
+    using BasicCommonResponsePtr = std::shared_ptr<BasicCommonResponse>;
+    using BasicConsumeResponsePtr = std::shared_ptr<BasicConsumeResponse>;
+
+    class Channel
     {
     private:
         std::string _cid;
@@ -29,14 +39,26 @@ namespace MyMQ
         std::unordered_map<std::string, BasicCommonResponsePtr> _basicResps;
 
     private:
-        BasicCommonResponsePtr WaitResponse(const std::string& rid);
+        BasicCommonResponsePtr WaitResponse(const std::string& rid) {
+            std::unique_lock<std::mutex> lock(_mutex);
+            _cv.wait(lock, [&rid, this] {
+               return _basicResps.contains(rid);
+            });
+
+            auto ptr = _basicResps[rid];
+            _basicResps.erase(rid);
+
+            return ptr;
+        }
 
     public:
-        ClientChannel(const muduo::net::TcpConnectionPtr& conn, const ProtobufCodecPtr& codec)
+        Channel(const muduo::net::TcpConnectionPtr& conn, const ProtobufCodecPtr& codec)
             :_cid(UUIDHelper::UUID()), _conn(conn), _codec(codec) {
         }
 
-        ~ClientChannel();
+        ~Channel();
+
+        std::string cid() { return _cid; }
 
         bool OpenChannel() {
             OpenChannelRequest req;
@@ -189,7 +211,7 @@ namespace MyMQ
     public:
         void PutBasicResponse(const BasicCommonResponsePtr& resp) {
             std::unique_lock<std::mutex> lock(_mutex);
-            _basicResps.insert(std::make_pair(resp->rid(), resp));
+            _basicResps.insert(std::make_pair(resp->cid(), resp));
             _cv.notify_all();
         }
 
@@ -203,6 +225,35 @@ namespace MyMQ
                 return;
             }
             _consumer->callback(resq->consumer_tag(), resq->mutable_properties(), resq->body());
+        }
+    };
+
+    class ChannelManager {
+    private:
+        std::mutex _mutex;
+        std::unordered_map<std::string, ChannelPtr> _channels;
+    public:
+        ChannelManager() = default;
+
+        ChannelPtr Create(const muduo::net::TcpConnectionPtr& conn, const ProtobufCodecPtr& codec) {
+            std::unique_lock<std::mutex> lock(_mutex);
+
+            auto channel = std::make_shared<Channel>(conn, codec);
+            _channels.emplace(channel->cid(), channel);
+
+            return channel;
+        }
+
+        void Remove(const std::string& cid) {
+            std::unique_lock<std::mutex> lock(_mutex);
+            _channels.erase(cid);
+        }
+
+        ChannelPtr Get(const std::string& cid) {
+            std::unique_lock<std::mutex> lock(_mutex);
+            if(!_channels.contains(cid))    return {};
+
+            return _channels[cid];
         }
     };
 }
