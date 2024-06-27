@@ -56,7 +56,7 @@ TEST(MessageManager, insert)
 TEST(MessageManager, selectQ1)
 {
     ASSERT_EQ(mmp->GetTableCount("queue1"), 5);
-    MessagePtr msg = mmp->Front("queue1");
+    MyMessagePtr msg = mmp->Front("queue1");
     ASSERT_NE(msg.get(), nullptr);
     ASSERT_EQ(msg->payload().body(), std::string("Hello World-1"));
     ASSERT_EQ(mmp->GetTableCount("queue1"), 4);
