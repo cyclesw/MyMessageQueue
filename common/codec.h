@@ -6,6 +6,8 @@
 //
 // Author: Shuo Chen (chenshuo at chenshuo dot com)
 
+//TODO 弄清楚原理，复写
+
 #ifndef MUDUO_EXAMPLES_PROTOBUF_CODEC_CODEC_H
 #define MUDUO_EXAMPLES_PROTOBUF_CODEC_CODEC_H
 

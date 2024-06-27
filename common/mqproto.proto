@@ -20,10 +20,10 @@ message DeclareExchangeRequest
 {
     string rid = 1;
     string cid = 2;
-    string exchangeName = 3;
-    ExchangeType exchangeType = 4;
+    string exchange_name = 3;
+    ExchangeType exchange_type = 4;
     bool durable = 5;
-    bool autoDelete = 6;
+    bool auto_delete = 6;
     map<string, string> args = 7;
 };
 
@@ -31,14 +31,14 @@ message DeleteExchangeRequest
 {
     string rid = 1;
     string cid = 2;
-    string exchangeName = 3;
+    string exchange_name = 3;
 };
 
 message DeleteQueueRequest
 {
     string rid = 1;
     string cid = 2;
-    string queueName = 3;
+    string queue_name = 3;
 };
 
 // 定义队列
@@ -46,10 +46,10 @@ message DeclareQueueRequest
 {
     string rid = 1;
     string cid = 2;
-    string queueName = 3;
+    string queue_name = 3;
     bool exclusive = 4;
     bool durable = 5;
-    bool autoDelete = 6;
+    bool auto_delete = 6;
     map<string, string> args = 7;
 };
 
@@ -57,9 +57,9 @@ message QueueBindRequest
 {
     string rid = 1;
     string cid = 2;
-    string exchangeName = 3;
-    string queueName = 4;
-    string bindingKey = 5;
+    string exchange_name = 3;
+    string queue_name = 4;
+    string binding_key = 5;
 }
 
 // 队列
@@ -67,16 +67,16 @@ message QueueUnBindRequest
 {
     string rid = 1;
     string cid = 2;
-    string exchangeName = 3;
-    string queueName = 4;
+    string exchange_name = 3;
+    string queue_name = 4;
 };
 
 // 订阅发布
-message BasicPushlishRequest
+message BasicPublishRequest
 {
     string rid = 1;
     string cid = 2;
-    string exchangeName = 3;
+    string exchange_name = 3;
     string body = 4;
     BasicProperties properties = 5;
 };
@@ -86,8 +86,8 @@ message BasicAckRequest
 {
     string cid = 1;
     string rid = 2;
-    string queueName = 3;
-    string messageId = 4;
+    string queue_name = 3;
+    string message_id = 4;
 };
 
 // 队列的订阅
@@ -95,16 +95,16 @@ message BasicConsumeRequest
 {
     string rid = 1;
     string cid = 2;
-    string consumerTag = 3;
-    string queueName = 4;
-    bool autoAck = 5;
+    string consumer_tag = 3;
+    string queue_name = 4;
+    bool auto_ack = 5;
 };
 
 // 信息推送
 message BasicConsumeResponse
 {
     string cid = 1;
-    string consumerTag = 2;
+    string consumer_tag = 2;
     string body = 3;
     BasicProperties properties = 4;
 };
@@ -114,8 +114,8 @@ message BasicCancelRequest
 {
     string rid = 1;
     string cid = 2;
-    string consumerTag = 3;
-    string queueName = 4;
+    string consumer_tag = 3;
+    string queue_name = 4;
 };
 
 

@@ -32,7 +32,7 @@ namespace MyMQ
             int ret = sqlite3_open_v2(_dbfile.c_str(), &_handler, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, nullptr);
             if(ret != SQLITE_OK)
             {
-                LOG_CRITICAL("数据库打开失败：{}", sqlite3_errmsg(_handler));
+                LOG_CRITICAL("{} 数据库打开失败：{}", _dbfile, sqlite3_errmsg(_handler));
                 return false;
             }
             return true;

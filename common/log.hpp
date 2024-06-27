@@ -4,13 +4,12 @@
 
 #pragma once
 
-#ifdef SPDLOG_COMPILED_LIB
-
+#ifdef DEBUG
 #define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_TRACE
+#endif
 
 #include <spdlog/spdlog.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
-#include <iostream>
 
 namespace MyMQ {
 //TODO 初始化日记 完善
@@ -60,7 +59,6 @@ namespace MyMQ {
 
 }
 
-#else
 //[x]
 // #include <iostream>
 // #include <format>
@@ -92,5 +90,3 @@ namespace MyMQ {
 // #define LOG_CRITICAL(...) Log("CRITICAL", __VA_ARGS__)
 
 // }
-
-#endif
