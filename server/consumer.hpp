@@ -38,12 +38,12 @@ namespace MyMQ
 
         std::string _qname;
         std::mutex _mutex;
-        unsigned long long _rrSeq;    //轮转号？
+        unsigned long long _rrSeq{};    //轮转号？
         std::vector<ConsumerPtr> _consumers;
     public:
         QueueConsumer() = default;
 
-        QueueConsumer(const std::string& qname) :_qname(qname) {}
+        explicit QueueConsumer(const std::string& qname) :_qname(qname) {}
 
         ConsumerPtr Create(const std::string & ctag, const std::string& cname, const bool autoAck, const ConsumerCallback& callback)
         {

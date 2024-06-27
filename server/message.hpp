@@ -12,9 +12,9 @@ namespace MyMQ {
     class MessageManager;
     class MessageMapper;
 
-    //FIXME MessagePtr 类型不明确
+    //FIXME MyMessagePtr 类型不明确
     using QueueMessagePtr = std::shared_ptr<QueueMessage>;
-    using MessagePtr = std::shared_ptr<Message>;
+    using MyMessagePtr = std::shared_ptr<Message>;
     using MessageManagerPtr = std::shared_ptr<MessageManager>;
     using MessageMapperPtr = std::shared_ptr<MessageMapper>;
 
@@ -57,12 +57,12 @@ namespace MyMQ {
             return FileHelper::RemoveFile(_datafile) && FileHelper::RemoveFile(_tempfile);
         }
 
-        bool Insert(MessagePtr& msg)
+        bool Insert(MyMessagePtr& msg)
         {
             return insert(_datafile, msg);
         }
 
-        bool Remove(MessagePtr& msg)
+        bool Remove(MyMessagePtr& msg)
         {   //覆盖原有数据?
             msg->mutable_payload()->set_valid("0"); //设置标志位
 
@@ -84,10 +84,10 @@ namespace MyMQ {
         }
 
         // 读取有效数据并存入tmp文件，删除datafil
-        std::list<MessagePtr> Gc()
+        std::list<MyMessagePtr> Gc()
         {
             bool ret;
-            std::list<MessagePtr> result;
+            std::list<MyMessagePtr> result;
             ret = load(result);
             if(ret == false)
             {
@@ -113,7 +113,7 @@ namespace MyMQ {
         }
 
     private:
-        bool insert(const std::string& datafile, MessagePtr& msg)   
+        bool insert(const std::string& datafile, MyMessagePtr& msg)
         {
             std::string body = msg->payload().SerializeAsString();
             FileHelper helper(datafile);
@@ -140,7 +140,7 @@ namespace MyMQ {
             return true;
         }
 
-        bool load(std::list<MessagePtr>& result)
+        bool load(std::list<MyMessagePtr>& result)
         {   //加载所有有效数据
             FileHelper data_file_helper(_datafile);
 
@@ -169,7 +169,7 @@ namespace MyMQ {
                 }
 
                 offset += msg_size;
-                MessagePtr msgq = std::make_shared<Message>();
+                MyMessagePtr msgq = std::make_shared<Message>();
                 msgq->mutable_payload()->ParseFromString(msg_body); //解析字符串
                 // 返回给gc，gc再返回给insert更新offset、length.
                 if(msgq->payload().valid() == "0")
@@ -188,9 +188,9 @@ namespace MyMQ {
     class QueueMessage
     {
     private:
-        std::list<MessagePtr> _msgs;    //TODO boost：lookfree?
-        std::unordered_map<std::string, MessagePtr> _durableMsgs;
-        std::unordered_map<std::string, MessagePtr> _waitackMsgs;
+        std::list<MyMessagePtr> _msgs;    //TODO boost：lookfree?
+        std::unordered_map<std::string, MyMessagePtr> _durableMsgs;
+        std::unordered_map<std::string, MyMessagePtr> _waitackMsgs;
         MessageMapper _mapper;
 
         std::mutex _mutex;
@@ -212,7 +212,7 @@ namespace MyMQ {
         bool Insert(const BasicProperties* properties, const std::string& body, bool delivery_mode = true)
         {
             // 构建Msg
-            MessagePtr msg = std::make_shared<Message>();
+            MyMessagePtr msg = std::make_shared<Message>();
             auto payload = msg->mutable_payload();
             payload->set_body(body);
             if(properties != nullptr)
@@ -247,7 +247,7 @@ namespace MyMQ {
             return true;
         }
 
-        MessagePtr Front()
+        MyMessagePtr Front()
         {
             LOCK(_mutex);
             auto font = _msgs.front();
@@ -438,13 +438,13 @@ namespace MyMQ {
             return qmp->Insert(properties, body, delivermode);
         }
 
-        MessagePtr Front(const std::string& qname)
+        MyMessagePtr Front(const std::string& qname)
         {
             QueueMessagePtr qmp;
             {
                 LOCK(_mutex);
                 auto ret = findQueue(qname, qmp);
-                if(!ret)    return MessagePtr();
+                if(!ret)    return MyMessagePtr();
             }
 
             return qmp->Front();

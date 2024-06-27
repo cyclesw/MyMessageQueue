@@ -136,7 +136,7 @@ namespace MyMQ
             return _mmp->Ack(qname, msgid);
         }
 
-        MessagePtr BasicConsume(const std::string& qname)
+        MyMessagePtr BasicConsume(const std::string& qname)
         {
             return _mmp->Front(qname);
         }

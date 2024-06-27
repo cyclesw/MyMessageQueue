@@ -6,10 +6,10 @@
 namespace MyMQ
 {
     class Connection;
-    class ConnectionMannager;
+    class ConnectionManager;
 
     using ConnectionPtr = std::shared_ptr<Connection>;
-    using ConnectionMannagerPtr = std::shared_ptr<ConnectionMannager>;
+    using ConnectionManagerPtr = std::shared_ptr<ConnectionManager>;
 
     class Connection
     {
@@ -61,15 +61,16 @@ namespace MyMQ
         }
     };
 
-    class ConnectionMannager
+    class ConnectionManager
     {
     private:
         std::mutex _mutex;
         std::unordered_map<muduo::net::TcpConnectionPtr, ConnectionPtr> _conns;
     public:
-        ConnectionMannager() = default;
+        ConnectionManager() = default;
 
         void NewConnection(const VirtualHostPtr& host,
+                const ConsumerManagerPtr& cmp,
                 const ProtobufCodecPtr& codec,
                 const muduo::net::TcpConnectionPtr& conn,
                 ThreadPool* pool)  //TODO const？
@@ -78,14 +79,19 @@ namespace MyMQ
             auto it = _conns.find(conn);
             if(it != _conns.end())
                 return;
-            auto cp = std::make_shared<ConnectionPtr>();
+            auto cp = std::make_shared<Connection>(host, cmp, conn, pool);
+            _conns.insert(std::make_pair(conn, cp));
         }
         
         void DeleteConnection(const muduo::net::TcpConnectionPtr& conn)
         {
             std::unique_lock<std::mutex> lock(_mutex);
+            _conns.erase(conn);
         }
 
-        ConnectionPtr GetConnection(const muduo::net::TcpConnectionPtr& conn);
+        ConnectionPtr GetConnection(const muduo::net::TcpConnectionPtr& conn)
+        {
+            return _conns.contains(conn) ? _conns[conn] : ConnectionPtr();
+        }
     };
 }
