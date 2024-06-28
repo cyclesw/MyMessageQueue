@@ -25,10 +25,18 @@ namespace MyMQ
         bool autoAck;
         ConsumerCallback callback;
 
-        Consumer() = default;
+        Consumer() {
+            LOG_DEBUG("new Consumer:{}", static_cast<void*>(this));
+        }
+
+        ~Consumer() {
+            LOG_DEBUG("delete Consumer: {}", static_cast<void*>(this));
+        }
+
         Consumer(const std::string& tag, const std::string& qname, const bool autoAck, const ConsumerCallback& callback)
-            :tag(tag), qname(qname), autoAck(autoAck), callback(callback)
-        {}
+            :tag(tag), qname(qname), autoAck(autoAck), callback(callback) {
+            LOG_DEBUG("new Consumer(args):{}", static_cast<void*>(this));
+        }
     };
 
     class QueueConsumer
@@ -38,14 +46,14 @@ namespace MyMQ
 
         std::string _qname;
         std::mutex _mutex;
-        unsigned long long _rrSeq{};    //轮转号？
+        uint64_t _rrSeq ;    //轮转号？
         std::vector<ConsumerPtr> _consumers;
     public:
         QueueConsumer() = default;
 
-        explicit QueueConsumer(const std::string& qname) :_qname(qname) {}
+        explicit QueueConsumer(const std::string& qname) :_qname(qname), _rrSeq(0) {}
 
-        ConsumerPtr Create(const std::string & ctag, const std::string& cname, const bool autoAck, const ConsumerCallback& callback)
+        ConsumerPtr Create(const std::string & ctag, const std::string& qname, const bool autoAck, const ConsumerCallback& callback)
         {
             LOCK(_mutex);
             for(auto& it : _consumers)
@@ -53,7 +61,7 @@ namespace MyMQ
                 if(ctag == it->tag) return {};
             }
 
-            auto consumer = std::make_shared<Consumer>(ctag, cname, autoAck, callback);
+            auto consumer = std::make_shared<Consumer>(ctag, qname, autoAck, callback);
             _consumers.push_back(consumer);
 
             return consumer;
@@ -77,8 +85,9 @@ namespace MyMQ
             LOCK(_mutex);
             if(_consumers.empty())  return {};
 
-            auto index = _rrSeq % _consumers.size();
+            int index = _rrSeq % _consumers.size();
             _rrSeq++;
+            // LOG_DEBUG("index:{} _consumers.size:{}", index, _consumers.size());
 
             return _consumers[index];
         }
@@ -115,8 +124,8 @@ namespace MyMQ
     private:
 #define LOCK(mtx) std::unique_lock<std::mutex> lock(mtx)
 
-    std::mutex _mutex;
-    std::unordered_map<std::string, QueueConsumerPtr> _qconsumer;
+    std::mutex _mutex{};
+    std::unordered_map<std::string, QueueConsumerPtr> _qconsumer{};
 
     private:
         bool findQueue(const std::string& qname, QueueConsumerPtr& qcp)
@@ -136,18 +145,15 @@ namespace MyMQ
 
         void InitQueueConsumer(const std::string& qname)
         {
-            QueueConsumerPtr qcp;
+            LOCK(_mutex);
+            auto it = _qconsumer.find(qname);
+            if(it != _qconsumer.end())
             {
-                LOCK(_mutex);
-                auto it = _qconsumer.find(qname);
-                if(it != _qconsumer.end())
-                {
-                    LOG_DEBUG("消费者队列已存在:{}", qname);
-                    return;
-                }
-                qcp = std::make_shared<QueueConsumer>();
-                _qconsumer.insert(std::make_pair(qname, qcp));
+                LOG_DEBUG("消费者队列已存在:{}", qname);
+                return;
             }
+            auto qcp = std::make_shared<QueueConsumer>(qname);
+            _qconsumer.insert(std::make_pair(qname, qcp));
         }
 
         ConsumerPtr Create(const std::string& ctag, const std::string& qname, bool ackFlag, const ConsumerCallback& callback)
@@ -155,8 +161,9 @@ namespace MyMQ
             QueueConsumerPtr qcp;
             {
                 LOCK(_mutex);
-                if(!findQueue(qname, qcp))
+                if(!findQueue(qname, qcp)) {
                     return {};
+                }
             }
 
             return qcp->Create(ctag, qname, ackFlag, callback);
@@ -191,8 +198,8 @@ namespace MyMQ
             QueueConsumerPtr qcp;
             {
                 LOCK(_mutex);
-                if(!findQueue(qname, qcp))
-                    return {};
+                if(!findQueue(qname, qcp)) {
+                }
             }
 
             return qcp->Choose();

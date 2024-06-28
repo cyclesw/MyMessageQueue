@@ -11,8 +11,8 @@
 #include "help.hpp"
 #include "mqproto.pb.h"
 #include "log.hpp"
-#include <condition_variable>
 #include <memory>
+#include <condition_variable>
 #include <muduo/net/TcpConnection.h>
 
 
@@ -56,13 +56,13 @@ namespace MyMQ
             :_cid(UUIDHelper::UUID()), _conn(conn), _codec(codec) {
         }
 
-        ~Channel();
+        ~Channel() { BasicCancel();}
 
         std::string cid() { return _cid; }
 
         bool OpenChannel() {
             OpenChannelRequest req;
-            req.set_cid(_cid);  //TODO set_cid 左值引用？？完美转发
+            req.set_cid(_cid);
             req.set_rid(UUIDHelper::UUID());
 
             _codec->send(_conn, req);
@@ -70,13 +70,12 @@ namespace MyMQ
             return resp->ok();
         }
 
-        bool CloseChannel() {
+        void CloseChannel() {
             CloseChannelRequest req;
             req.set_cid(_cid);
             req.set_rid(UUIDHelper::UUID());
             _codec->send(_conn, req);
-            auto resp = WaitResponse(req.rid());
-            return resp->ok();
+            WaitResponse(req.rid());
         }
 
         bool DeclareExchange(const std::string& ename, ExchangeType type,
@@ -85,6 +84,7 @@ namespace MyMQ
             req.set_cid(_cid);
             req.set_rid(UUIDHelper::UUID());
             req.set_durable(durable);
+            req.set_auto_delete(autoDelete);
             req.set_exchange_name(ename);
             req.set_exchange_type(type);
             req.mutable_args()->swap(args);
@@ -106,7 +106,9 @@ namespace MyMQ
         bool DeclareQueue(const std::string& qname, bool exclusive, bool durable, bool autoDelete, google::protobuf::Map<std::string, std::string>& args) {
             DeclareQueueRequest req;
             req.set_cid(_cid);
+            req.set_queue_name(qname);
             req.set_rid(UUIDHelper::UUID());
+            req.set_exclusive(exclusive);
             req.set_durable(durable);
             req.set_auto_delete(autoDelete);
             req.mutable_args()->swap(args);
@@ -167,6 +169,10 @@ namespace MyMQ
         }
 
         void BasicAck(const std::string& msgid) {
+            if (!_consumer) {
+                LOG_DEBUG("无消费者");
+                return;
+            }
             BasicAckRequest req;
             req.set_cid(_cid);
             req.set_rid(UUIDHelper::UUID());
@@ -174,12 +180,12 @@ namespace MyMQ
             req.set_queue_name(_consumer->qname);
 
             _codec->send(_conn, req);
-            auto resq = WaitResponse(req.rid());
+             WaitResponse(req.rid());
         }
 
-        bool BasicConsume(const std::string& qname, const std::string& consumer_tag,
+        bool BasicConsume(const std::string& consumer_tag, const std::string& qname,
                 bool autoAck, const ConsumerCallback& cb) {
-            if(!_consumer) {
+            if(_consumer.get()) {
                 LOG_DEBUG("当前信道已经订阅其他队列信息！");
                 return false;
             }
@@ -190,8 +196,12 @@ namespace MyMQ
             req.set_auto_ack(autoAck);
             req.set_queue_name(qname);
             _codec->send(_conn, req);
-            auto resq = WaitResponse(req.rid());
-            return resq->ok();
+            auto resp = WaitResponse(req.rid());
+            if(!resp->ok()) {
+                return false;
+            }
+            _consumer = std::make_shared<Consumer>(consumer_tag, qname, autoAck, cb);
+            return true;
         }
 
         void BasicCancel() {
@@ -211,7 +221,7 @@ namespace MyMQ
     public:
         void PutBasicResponse(const BasicCommonResponsePtr& resp) {
             std::unique_lock<std::mutex> lock(_mutex);
-            _basicResps.insert(std::make_pair(resp->cid(), resp));
+            _basicResps.insert(std::make_pair(resp->rid(), resp));
             _cv.notify_all();
         }
 

@@ -14,10 +14,10 @@ namespace MyMQ
     class Connection
     {
     private:
+        VirtualHostPtr _host;
+        ConsumerManagerPtr _cmp;
         muduo::net::TcpConnectionPtr _conn;
         ProtobufCodecPtr _codec;
-        ConsumerManagerPtr _cmp;
-        VirtualHostPtr _host;
         ThreadPool* _pool;
         ChannelManagerPtr _channels;
     public:
@@ -25,7 +25,7 @@ namespace MyMQ
                 const ConsumerManagerPtr& cmp,
                 const muduo::net::TcpConnectionPtr& conn,
                 ThreadPool* pool)
-                :_host(host), _cmp(cmp), _conn(conn), _pool(pool)
+                :_host(host), _cmp(cmp), _conn(conn), _pool(pool), _channels(std::make_shared<ChannelManager>())
         {}
         
         void OpenChannel(const OpenChannelRequestPtr& req)
@@ -51,9 +51,10 @@ namespace MyMQ
             return _channels->GetChannel(cid);
         }
     private:
-        void basicResponse(bool ok, const std::string& rid, const std::string& cid)
+        void basicResponse(bool ok, const std::string& rid, const std::string& cid) const
         {
             BasicCommonResponse resp;
+            LOG_DEBUG("basicRespnse to {}", _conn->peerAddress().toIpPort());
             resp.set_rid(rid);
             resp.set_ok(ok);
             resp.set_cid(cid);

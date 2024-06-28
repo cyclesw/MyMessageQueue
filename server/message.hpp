@@ -193,7 +193,7 @@ namespace MyMQ {
         std::unordered_map<std::string, MyMessagePtr> _waitackMsgs;
         MessageMapper _mapper;
 
-        std::mutex _mutex;
+        std::mutex _mutex{};
         std::string _qname;
 
         size_t _total_count;    
@@ -260,12 +260,13 @@ namespace MyMQ {
 
         bool Remove(const std::string& msg_id)
         {
-            LOCK(_mutex);
+            // LOCK(_mutex);
+            std::unique_lock<std::mutex> lock(_mutex);
             // 寻找信息
             auto it = _waitackMsgs.find(msg_id);
             if(it == _waitackMsgs.end())
             {
-                LOG_DEBUG("等待队列寻找信息失败：{}", it->second->payload().body());
+                LOG_DEBUG("等待队列寻找信息失败：");
                 return false;
             }
             auto& payload = it->second->payload();

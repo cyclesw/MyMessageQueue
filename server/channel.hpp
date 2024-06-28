@@ -42,11 +42,11 @@ namespace MyMQ
     {
     private:
         std::string _cid;
+        VirtualHostPtr _host;
         ConsumerManagerPtr _cmp;
+        ProtobufCodecPtr _codec;
         ConsumerPtr _consumer;
         muduo::net::TcpConnectionPtr _conn;
-        VirtualHostPtr _host;
-        ProtobufCodecPtr _codec;
         ThreadPool* _pool;
     public:
         Channel(const std::string& id, const VirtualHostPtr& host, const ConsumerManagerPtr& cmp,
@@ -58,7 +58,7 @@ namespace MyMQ
 
         ~Channel()
         {
-            if(_cmp.get() != nullptr)
+            if(_consumer.get() != nullptr)
             {
                 _cmp->Remove(_consumer->tag, _consumer->qname);
             }
@@ -116,7 +116,7 @@ namespace MyMQ
             // 获取交换机中的绑定队列
             auto map = _host->ExchangeBindings(req->exchange_name());
             BasicProperties* bp;
-            std::string routingKey;
+            std::string routingKey{};
             if(req->has_properties())
             {
                 bp = req->mutable_properties();
@@ -126,7 +126,7 @@ namespace MyMQ
             for(auto& it : map)
             {
                 //  路由匹配则发送
-                if(Router::Route(exp->type, bp->routing_key(), it.second->binding_key))
+                if(Router::Route(exp->type, routingKey, it.second->binding_key))
                 {
                     _host->BasicPublish(it.first, bp, req->body());
                     auto task = std::bind(&Channel::consume, this, it.first);
@@ -154,6 +154,8 @@ namespace MyMQ
 
         void BasicAck(const BasicAckRequestPtr& req)
         {
+            _host->BasicAck(req->queue_name(), req->message_id());
+            return basicResponse(true, req->rid(), req->cid());
         }
 
     private:
@@ -169,6 +171,7 @@ namespace MyMQ
                 resp.mutable_properties()->set_delivery_mode(bp->delivery_mode());
                 resp.mutable_properties()->set_routing_key(bp->routing_key());
             }
+            // LOG_DEBUG("向{}发送ConsumResponse", _conn->peerAddress().toIpPort());
             
             _codec->send(_conn, resp);
         }
@@ -188,18 +191,15 @@ namespace MyMQ
                 return;
             }
             cp->callback(cp->tag, mp->mutable_payload()->mutable_properties(), mp->payload().body());
-            if(cp->autoAck)
-            {
-                _host->BasicAck(qname, mp->payload().properties().id());
-            }
+            if(cp->autoAck) _host->BasicAck(qname, mp->payload().properties().id());
         }
 
-        void basicResponse(bool Ok, const std::string& rid, const std::string& cid)
+        void basicResponse(const bool ok, const std::string& rid, const std::string& cid)
         {
             BasicCommonResponse resp;
             resp.set_rid(rid);
             resp.set_cid(cid);
-            resp.set_ok(Ok);
+            resp.set_ok(ok);
             _codec->send(_conn, resp);
         }
     };

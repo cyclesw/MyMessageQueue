@@ -38,13 +38,23 @@ namespace MyMQ {
             _dispatcher(std::bind(&Connection::OnUnknownMessage, this, _1, _2, _3)),
             _codec(std::make_shared<ProtobufCodec>(std::bind(&ProtobufDispatcher::onProtobufMessage,
                 &_dispatcher, _1, _2, _3))),
-            _cmp(std::make_shared<ChannelManager>()){}
+            _cmp(std::make_shared<ChannelManager>()) {
+
+            _dispatcher.registerMessageCallback<BasicCommonResponse>(std::bind(&Connection::BasicResponse, this, _1, _2, _3));
+            _dispatcher.registerMessageCallback<BasicConsumeResponse>(std::bind(&Connection::ConsumeResponse, this, _1, _2, _3));
+
+            _client.setMessageCallback(std::bind(&ProtobufCodec::onMessage, _codec.get(), _1, _2, _3));
+            _client.setConnectionCallback(std::bind(&Connection::OnConnection, this, _1));
+
+            _client.connect();
+            _latch.wait();
+        }
 
         ChannelPtr OpenChannel() {
             auto channel = _cmp->Create(_conn, _codec);
-            if(channel) {
+            if (channel) {
                 bool ret = channel->OpenChannel();
-                if(!ret) {
+                if (!ret) {
                     LOG_DEBUG("信道打开失败");
                     return {};
                 }
@@ -59,6 +69,7 @@ namespace MyMQ {
 
     private:
         void BasicResponse(const muduo::net::TcpConnectionPtr& conn, const BasicCommonResponsePtr& resp, muduo::Timestamp) {
+            // LOG_DEBUG("进入BasicResponse");
             auto channel = _cmp->Get(resp->cid());
             if(!channel) {
                 LOG_DEBUG("信道未找到");
@@ -68,22 +79,29 @@ namespace MyMQ {
         }
 
         void ConsumeResponse(const muduo::net::TcpConnectionPtr& conn, const BasicConsumeResponsePtr& resp, muduo::Timestamp) {
+            // LOG_DEBUG("进入ConsumeResponse");
             auto channel = _cmp->Get(resp->cid());
             if(!channel) {
                 LOG_DEBUG("信道未找到");
                 return;
             }
-            _worker->_pool->enqueue([&channel, &resp] {
+            _worker->_pool->enqueue([channel, resp] {
                 channel->Consume(resp);
             });
         }
 
         void OnUnknownMessage(const muduo::net::TcpConnectionPtr& conn, const MessagePtr& req, muduo::Timestamp) {
-            LOG_INFO("UnkownMessage from {} : {}", conn->peerAddress().toIpPort(), req->GetDescriptor());
+            LOG_INFO("UnkownMessage from {}", conn->peerAddress().toIpPort());
         }
 
-
         void OnConnection(const muduo::net::TcpConnectionPtr& conn) {
+            if(conn->connected()) {
+                _latch.countDown();
+                _conn = conn;
+            }
+            else {
+                _conn.reset();
+            }
             LOG_INFO("Connection {} {}", conn->peerAddress().toIpPort(), conn->connected() ? "UP" : "DOWN");
         }
     };

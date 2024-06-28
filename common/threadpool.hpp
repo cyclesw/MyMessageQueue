@@ -46,7 +46,7 @@ private:
     std::queue< std::function<void()> > _tasks; // 任务队列
     std::mutex _queue_mutex;    // 用于保护任务队列的互斥锁
     std::condition_variable _condition; // 用于同步操作
-    std::atomic<bool> _stop;
+    std::atomic<bool> _stop = false;
 };
 
 std::once_flag ThreadPool::_flag;	//静态成员要在类外初始化

@@ -26,10 +26,10 @@ namespace MyMQ {
             LOG_DEBUG("new Consumer: {}", static_cast<void*>(this));
         }
 
-        Consumer(const std::string& ctag, const std::string& qname, bool auto_ack, ConsumerCallback& cb)
-            :tag(ctag), qname(qname), autoAck(auto_ack), callback(std::move(callback)) {}
-
-
+        Consumer(const std::string& ctag, const std::string& qname, bool auto_ack, ConsumerCallback  cb)
+            :tag(ctag), qname(qname), autoAck(auto_ack), callback(std::move(cb)) {
+            LOG_DEBUG("new  Consumer(args): {}", static_cast<void*>(this));
+        }
     };
 }
 

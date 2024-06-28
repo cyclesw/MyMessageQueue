@@ -4,9 +4,9 @@
 
 #pragma once
 
-#ifdef DEBUG
+// #ifdef DEBUG
 #define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_TRACE
-#endif
+// #endif
 
 #include <spdlog/spdlog.h>
 #include <spdlog/sinks/stdout_color_sinks.h>

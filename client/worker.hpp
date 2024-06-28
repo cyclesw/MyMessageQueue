@@ -16,7 +16,7 @@ namespace MyMQ {
     class AsyncWorker {
     public:
         muduo::net::EventLoopThread _loop;
-        ThreadPool* _pool;
+        ThreadPool* _pool = ThreadPool::getInstance(5);
     };
 }
 

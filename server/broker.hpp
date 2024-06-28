@@ -37,13 +37,14 @@ namespace MyMQ
           _host(std::make_shared<VirtualHost>(HOSTNAME, basedir, basedir + DBFILE)),
           _cmp(std::make_shared<ConsumerManager>()),
           _cnmp(std::make_shared<ConnectionManager>()),
-          _pool(ThreadPool::getInstance())
+          _pool(ThreadPool::getInstance(1))
         {
             auto map = _host->AllQueue();
             for(auto& it : map)
             {
                 _cmp->InitQueueConsumer(it.first);
             }
+
             _dispatcher.registerMessageCallback<OpenChannelRequest>(std::bind(&Server::OnOpenChannel, this, _1, _2, _3));
             _dispatcher.registerMessageCallback<CloseChannelRequest>(std::bind(&Server::CloseOpenChannel, this, _1, _2, _3));
             _dispatcher.registerMessageCallback<DeclareExchangeRequest>(std::bind(&Server::OnDeclareExchange, this, _1, _2, _3));
@@ -57,8 +58,8 @@ namespace MyMQ
             _dispatcher.registerMessageCallback<BasicConsumeRequest>(std::bind(&Server::OnBasicConsume, this, _1, _2, _3));
             _dispatcher.registerMessageCallback<BasicCancelRequest>(std::bind(&Server::OnBasicCancel, this, _1, _2, _3));
 
-            _server.setConnectionCallback(std::bind(&Server::OnConnection, this, _1));
             _server.setMessageCallback(std::bind(&ProtobufCodec::onMessage, _codec.get(), _1, _2, _3));
+            _server.setConnectionCallback(std::bind(&Server::OnConnection, this, _1));
         }
 
         void Start()
@@ -87,6 +88,12 @@ namespace MyMQ
 
         // 处理连接
         void OnConnection(const TcpConnectionPtr &conn) {
+            if (conn->connected()) {
+                _cnmp->NewConnection(_host, _cmp, _codec, conn, _pool);
+            }
+            else {
+                _cnmp->DeleteConnection(conn);
+            }
             LOG_INFO("{} 连接 {}", conn->peerAddress().toIpPort(), conn->connected() ? "UP" : "DOWN");
         }
 
@@ -194,10 +201,14 @@ namespace MyMQ
             if(connection)
             {
                 auto ch = connection->GetChannel(req->cid());
-                if(ch)
-                    ch->BasicPublish(req);
+                if(!ch) {
+                    LOG_DEBUG("没有找到信号");
+                    return;
+                }
+                ch->BasicPublish(req);
             }
         }
+
         void OnBasicAck(const TcpConnectionPtr& conn, const BasicAckRequestPtr& req, muduo::Timestamp)
         {
             auto connection = GetValidConnection(conn, "消息确认");
@@ -209,6 +220,7 @@ namespace MyMQ
         }
         void OnBasicConsume(const TcpConnectionPtr& conn, const BasicConsumeRequestPtr& req, muduo::Timestamp)
         {
+            LOG_DEBUG("进入OnBasicConsume");
             auto connection = GetValidConnection(conn, "消息消费");
             if(connection)
             {
