@@ -20,6 +20,9 @@ message("\n--------------------包查询----------------------------")
 
 message("MYLib:${MyLib_LIBRARIES}")
 message("Gtest:${Gtest_LIBRARIES}")
+message("Protobuf: ${Protobuf_LIBRARIES}")
+#message("Boost:${Boost_LIBRARIES}")
+
 
 message("----------------------------------------------------\n")
 
